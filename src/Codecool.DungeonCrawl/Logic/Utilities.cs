@@ -37,5 +37,8 @@ namespace Codecool.DungeonCrawl.Logic
             TileType.Wall => false,
             _ => true
         };
+
+        public static void AddToInventory();
     }
 }
+

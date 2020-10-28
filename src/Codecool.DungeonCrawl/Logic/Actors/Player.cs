@@ -8,6 +8,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
     /// <summary>
     ///     The game player
     /// </summary>
+
     public class Player : Actor, IUpdatable
     {
         public Player(Cell cell) : base(cell, TileSet.GetTile(TileType.Player))

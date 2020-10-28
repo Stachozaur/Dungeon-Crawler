@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\Codecool.DungeonCrawl",
+    "\\src\\Codecool.DungeonCrawl\\bin",
+    "\\src\\Codecool.DungeonCrawl\\Logic",
+    "\\src\\Codecool.DungeonCrawl\\Logic\\Actors",
+    "\\src\\Codecool.DungeonCrawl\\Logic\\Interfaces",
+    "\\src\\Codecool.DungeonCrawl\\Logic\\Map",
+    "\\src\\Codecool.DungeonCrawl\\obj"
+  ],
+  "SelectedNode": "\\src\\Codecool.DungeonCrawl\\Logic\\Map\\GameMap.cs",
+  "PreviewInSolutionExplorer": false
+}
