@@ -8,11 +8,19 @@ namespace Codecool.DungeonCrawl.Logic.Actors
     /// <summary>
     ///     The game player
     /// </summary>
-    public class Player : Actor, IUpdatable
+    public class Player : Actor, IUpdatable, IPlayerAttributes
     {
+        public int _hp { get; private set; } = 100;
+        public int _attack { get; private set; } = 10;
+        public int _dexterity { get; private set; } = 10;
+        public int _actionPoints { get; private set; } = 50;
+        public int _magicResistance { get; private set; } = 0;
+        public int _armor { get; private set; } = 10;
+
         public Player(Cell cell) : base(cell, TileSet.GetTile(TileType.Player))
         {
             Program.UpdatablesToAdd.Add(this);
+
         }
 
         public void Update(float deltaTime)
@@ -51,6 +59,11 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         {
             // TODO Receive damage logic
             return false;
+        }
+
+        public void AddToInventory(Item item, int count)
+        {
+
         }
     }
 }

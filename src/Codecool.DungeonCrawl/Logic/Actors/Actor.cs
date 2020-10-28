@@ -1,7 +1,10 @@
+using Codecool.DungeonCrawl.Items;
 using Codecool.DungeonCrawl.Logic.Interfaces;
 using Codecool.DungeonCrawl.Logic.Map;
 using Perlin.Display;
 using Perlin.Geom;
+using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Codecool.DungeonCrawl.Logic.Actors
 {
@@ -10,6 +13,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
     /// </summary>
     public abstract class Actor
     {
+        private Inventory _inventory
         // default ctor
         protected Actor(Cell cell, Rectangle tile)
         {
@@ -75,6 +79,11 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             target.Actor = this;
 
             Position = target.Position;
+        }
+
+        public void ReceiveDMG(int damage, bool isMagic)
+        {
+
         }
     }
 }
