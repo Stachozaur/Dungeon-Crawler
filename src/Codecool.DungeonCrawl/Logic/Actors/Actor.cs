@@ -13,7 +13,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
     /// </summary>
     public abstract class Actor
     {
-        private Inventory _inventory
+        private Inventory _inventory;
         // default ctor
         protected Actor(Cell cell, Rectangle tile)
         {
