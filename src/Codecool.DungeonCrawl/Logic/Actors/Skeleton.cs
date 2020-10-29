@@ -21,5 +21,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public Skeleton(Cell cell) : base(cell, TileSet.GetTile(TileType.Skeleton))
         {
         }
+
+
     }
 }

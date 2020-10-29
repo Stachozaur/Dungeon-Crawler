@@ -2,6 +2,7 @@ using Codecool.DungeonCrawl.Logic.Interfaces;
 using Codecool.DungeonCrawl.Logic.Map;
 using Perlin;
 using System;
+using System.Collections.Generic;
 using Veldrid;
 
 namespace Codecool.DungeonCrawl.Logic.Actors
@@ -18,10 +19,15 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public int _magicResistance { get; private set; } = 0;
         public int _armor { get; private set; } = 10;
         private CombatMode _combatMode;
+        private List<Ability> _abilityList;
 
         public Player(Cell cell) : base(cell, TileSet.GetTile(TileType.Player))
         {
             Program.UpdatablesToAdd.Add(this);
+            _abilityList = new List<Ability>();
+            _abilityList.Add(new Ability(30, 0, "Attack"));
+            _abilityList.Add(new Ability(25, 20, "Heal"));
+            _abilityList.Add(new Ability(99, 45, "Pyroblast"));
 
         }
 
@@ -59,25 +65,12 @@ namespace Codecool.DungeonCrawl.Logic.Actors
 
         public override bool OnCollision(Actor other)
         {
-            if (this.Position.x == other.Position.x && this.Position.y == other.Position.y)
-            {
-                return true;
-            }
             return false;
         }
 
         public void AddToInventory(Item item, int count)
         {
 
-        }
-
-        public void RunCombat(Actor other)
-        {
-            var collision = OnCollision(other);
-            if (collision)
-            {
-                _combatMode.RunCombat();
-            }
         }
 
     }
