@@ -83,7 +83,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
 
         public void ReceiveDMG(int damage, bool isMagic)
         {
-
         }
+
     }
 }
