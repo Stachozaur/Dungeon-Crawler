@@ -1,6 +1,7 @@
 using Codecool.DungeonCrawl.Logic.Interfaces;
 using Codecool.DungeonCrawl.Logic.Map;
 using Perlin;
+using System;
 using Veldrid;
 
 namespace Codecool.DungeonCrawl.Logic.Actors
@@ -16,6 +17,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public int _actionPoints { get; private set; } = 50;
         public int _magicResistance { get; private set; } = 0;
         public int _armor { get; private set; } = 10;
+        private CombatMode _combatMode;
 
         public Player(Cell cell) : base(cell, TileSet.GetTile(TileType.Player))
         {
@@ -57,7 +59,10 @@ namespace Codecool.DungeonCrawl.Logic.Actors
 
         public override bool OnCollision(Actor other)
         {
-            // TODO Receive damage logic
+            if (this.Position.x == other.Position.x && this.Position.y == other.Position.y)
+            {
+                return true;
+            }
             return false;
         }
 
@@ -65,5 +70,15 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         {
 
         }
+
+        public void RunCombat(Actor other)
+        {
+            var collision = OnCollision(other);
+            if (collision)
+            {
+                _combatMode.RunCombat();
+            }
+        }
+
     }
 }
