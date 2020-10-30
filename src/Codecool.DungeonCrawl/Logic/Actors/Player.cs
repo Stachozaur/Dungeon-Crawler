@@ -58,9 +58,15 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         {
             var targetCell = Cell.GetNeighbour(dir);
             var canPass = targetCell?.OnCollision(this) ?? false;
+            var isActor = targetCell?.IsActor(this) ?? false;
 
-            if (canPass)
+            if (canPass && !isActor)
                 AssignCell(targetCell);
+
+            else if (canPass && isActor)
+            {
+                _combatMode.RunCombat();
+            }
         }
 
         public override bool OnCollision(Actor other)

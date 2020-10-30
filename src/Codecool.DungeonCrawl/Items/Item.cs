@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Codecool.DungeonCrawl
+namespace Codecool.DungeonCrawl.Items
 {
     public abstract class Item
     {
