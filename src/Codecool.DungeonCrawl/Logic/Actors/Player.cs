@@ -1,6 +1,8 @@
+using Codecool.DungeonCrawl.Items;
 using Codecool.DungeonCrawl.Logic.Interfaces;
 using Codecool.DungeonCrawl.Logic.Map;
 using Perlin;
+using System.Collections.Generic;
 using Veldrid;
 
 namespace Codecool.DungeonCrawl.Logic.Actors
@@ -20,6 +22,29 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public Player(Cell cell) : base(cell, TileSet.GetTile(TileType.Player))
         {
             Program.UpdatablesToAdd.Add(this);
+            var startingItems = new Dictionary<Item, int>
+            {
+                { new Weapon("B.F.H", 10, false, 5), 1 },
+                { new Consumable("Healing Potion", 10, true, 50), 1 },
+                { new Armor("Wooden Armor", 10, 0, 10), 1 },
+                { new Consumable("Mana Potion", 10, true, 50), 1 },
+            };
+            var newItems = new Dictionary<Item, int>
+            {
+                { new Weapon("B.F.H", 10, false, 5), 1 },
+                { new Consumable("Healing Potion", 10, true, 50), 1 },
+                { new Armor("Wooden Armor", 10, 0, 10), 1 },
+                { new Consumable("Mana Potion", 10, true, 50), 1 },
+                { new Armor("Iron Chestplate", 20, 0, 10), 1 }
+            };
+
+
+            _inventory = new Inventory(startingItems);
+            AddLootToInventory(newItems);
+            foreach (var item in _inventory.GetInventory())
+            {
+                System.Console.WriteLine($"{item.Key.GetItemName()}: {item.Value}");
+            }
 
         }
 
@@ -50,9 +75,15 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         {
             var targetCell = Cell.GetNeighbour(dir);
             var canPass = targetCell?.OnCollision(this) ?? false;
+            var isActor = targetCell?.IsActor(this) ?? false;
 
-            if (canPass)
+            if (canPass && !isActor)
                 AssignCell(targetCell);
+            
+            else if (canPass && isActor)
+            {
+                System.Console.WriteLine("dupa");
+            }
         }
 
         public override bool OnCollision(Actor other)
@@ -61,9 +92,9 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             return false;
         }
 
-        public void AddToInventory(Item item, int count)
+        public void AddLootToInventory(Dictionary<Item, int> lootedItems)
         {
-
+            _inventory.AddLootToInventory(lootedItems);
         }
     }
 }

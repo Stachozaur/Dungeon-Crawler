@@ -38,7 +38,7 @@ namespace Codecool.DungeonCrawl.Logic
             _ => true
         };
 
-        public static void AddToInventory();
+        //public static void AddToInventory();
     }
 }
 
