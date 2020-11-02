@@ -18,13 +18,6 @@ namespace Codecool.DungeonCrawl.Items
 
         public void AddLootToInventory(Dictionary<Item, int> lootedItems)
         {
-            //foreach (var item in lootedItems)
-            //{
-            //    if (_inventory.ContainsKey(item.Key))
-            //    {
-            //        _inventory[item.Key] += 1;
-            //    }
-            //}
             var inventoryCopy = new Dictionary<Item, int>(_inventory);
 
             foreach (var item in lootedItems)

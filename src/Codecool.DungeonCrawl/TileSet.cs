@@ -16,7 +16,7 @@ namespace Codecool.DungeonCrawl
         /// <summary>
         ///     Scale of the game (used as a multiplier)
         /// </summary>
-        public const int Scale = 3;
+        public const int Scale = 2;
 
         private static readonly Dictionary<TileType, Rectangle> TileMap;
 

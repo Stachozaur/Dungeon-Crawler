@@ -31,7 +31,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             };
             var newItems = new Dictionary<Item, int>
             {
-                { new Weapon("B.F.H", 10, false, 5), 1 },
+                { new Weapon("B.F.H", 10, false, 5), 2 },
                 { new Consumable("Healing Potion", 10, true, 50), 1 },
                 { new Armor("Wooden Armor", 10, 0, 10), 1 },
                 { new Consumable("Mana Potion", 10, true, 50), 1 },
