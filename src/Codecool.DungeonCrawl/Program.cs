@@ -58,6 +58,7 @@ namespace Codecool.DungeonCrawl
             stage.AddChild(_mapContainer);
 
             Map = MapLoader.LoadMap(_mapContainer);
+            UI.DisplayUIHeaders();
         }
 
         /// <summary>

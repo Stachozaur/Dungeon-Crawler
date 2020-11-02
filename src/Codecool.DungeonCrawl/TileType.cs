@@ -6,6 +6,15 @@
         Wall,
         Floor,
         Player,
-        Skeleton
+        Skeleton,
+        UIborderVerticalLeft,
+        UIborderHorizontalTop,
+        UIborderVerticalRight,
+        UIborderHorizontalBottom,
+        UIborderCornerTopLeft,
+        UIborderCornerTopRight,
+        UIborderCornerBottomLeft,
+        UIborderCornerBottomRaight,
+        textField
     }
 }
