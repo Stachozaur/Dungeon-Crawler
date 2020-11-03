@@ -103,15 +103,16 @@ namespace Codecool.DungeonCrawl.Logic.Actors
 
             else if (canPass && isActor)
             {
-                var enemy = targetCell.Actor;
-                var CombatMode = new CombatMode(this, enemy);
-                CombatMode.RunCombat();
-            }
-        }
                 if (targetCell.Actor is ItemActor)
                 {
                     PickUpItem(targetCell);
                     AssignCell(targetCell);
+                }
+                else
+                {
+                    var enemy = targetCell.Actor;
+                    var CombatMode = new CombatMode(this, enemy);
+                    CombatMode.RunCombat();
                 }
             }
         }

@@ -19,8 +19,7 @@
         HealingPotion,
         WoodenShield,
         ManaPotion,
-        IronChestplate
-        Skeleton,
+        IronChestplate,
         Sword,
         Key,
         Armor,
