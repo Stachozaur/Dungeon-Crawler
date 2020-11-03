@@ -77,5 +77,6 @@ namespace Codecool.DungeonCrawl.Logic.Map
             var (x, y) = dir.ToVector();
             return GetNeighbour(x, y);
         }
+
     }
 }

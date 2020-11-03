@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Codecool.DungeonCrawl.Items;
 using Codecool.DungeonCrawl.Logic.Actors;
 using Codecool.DungeonCrawl.Logic.Interfaces;
 using Codecool.DungeonCrawl.Logic.Map;
@@ -23,6 +25,7 @@ namespace Codecool.DungeonCrawl
         /// <summary>
         ///     Entry point
         /// </summary>
+        public static readonly Random Rnd = new Random();
         public static void Main()
         {
             var (width, height) = MapLoader.GetMapDimensions();
@@ -58,6 +61,7 @@ namespace Codecool.DungeonCrawl
             stage.AddChild(_mapContainer);
 
             Map = MapLoader.LoadMap(_mapContainer);
+            UI.DisplayUIHeaders();
         }
 
         /// <summary>
