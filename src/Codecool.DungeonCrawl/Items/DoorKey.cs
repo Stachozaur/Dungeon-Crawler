@@ -13,6 +13,7 @@ namespace Codecool.DungeonCrawl.Items
             _name = $"{keyType} Key";
             _value = 0;
             _droprate = 10;
+            _keyType = keyType;
             type = TileType.Key;
         }
 
