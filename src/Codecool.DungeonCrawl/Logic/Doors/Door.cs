@@ -17,15 +17,11 @@ namespace Codecool.DungeonCrawl.Logic.Doors
         {
 
         }
-        //public Door(Cell cell, DoorKeyType color, ) : base(cell, TileSet)
+        
+        //public bool IsKeyMatch(Inventory inventory)
         //{
 
         //}
-
-        //public bool KeyMatch(DoorBlue)
-        //{
-        //    retrun false;
-        //} 
 
     }
 
