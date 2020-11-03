@@ -1,4 +1,5 @@
 using System.IO;
+using Codecool.DungeonCrawl.Items;
 using Codecool.DungeonCrawl.Logic.Actors;
 using Perlin.Display;
 
@@ -82,6 +83,10 @@ namespace Codecool.DungeonCrawl.Logic.Map
             '.' => TileType.Floor,
             's' => TileType.Floor,
             'p' => TileType.Floor,
+            'w' => TileType.Floor,
+            'a' => TileType.Floor,
+            'c' => TileType.Floor,
+            'k' => TileType.Floor,
             _ => TileType.Empty
         };
 
@@ -95,6 +100,7 @@ namespace Codecool.DungeonCrawl.Logic.Map
         {
             's' => new Skeleton(cell),
             'p' => new Player(cell),
+            'w' => new ItemActor(cell, new Weapon("Dupa", 5, false, 100)),
             _ => null
         };
     }

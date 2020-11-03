@@ -2,6 +2,7 @@ using Codecool.DungeonCrawl.Items;
 using Codecool.DungeonCrawl.Logic.Interfaces;
 using Codecool.DungeonCrawl.Logic.Map;
 using Perlin;
+using SharpDX;
 using System.Collections.Generic;
 using Veldrid;
 
@@ -82,7 +83,11 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             
             else if (canPass && isActor)
             {
-                System.Console.WriteLine("dupa");
+                if (targetCell.Actor is ItemActor)
+                {
+                    PickUpItem(targetCell);
+                    AssignCell(targetCell);
+                }
             }
         }
 
@@ -95,6 +100,17 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public void AddLootToInventory(Dictionary<Item, int> lootedItems)
         {
             _inventory.AddLootToInventory(lootedItems);
+        }
+
+        private void PickUpItem(Cell targetCell)
+        {
+            _inventory.AddLootToInventory(targetCell.Actor.GetInventory());
+            targetCell.Actor.Destroy();
+            targetCell.Actor = null;
+            foreach (var item in _inventory.GetInventory())
+            {
+                System.Console.WriteLine($"{item.Key.GetItemName()}: {item.Value}");
+            }
         }
     }
 }

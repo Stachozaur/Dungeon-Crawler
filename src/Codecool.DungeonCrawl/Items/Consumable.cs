@@ -11,6 +11,7 @@
             _isRestoringHP = isRestoringHP;
             _droprate = droprate;
             _value = potionPower / 10;
+            type = TileType.Consumable;
         }
     }
 }

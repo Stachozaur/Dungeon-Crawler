@@ -6,6 +6,10 @@
         Wall,
         Floor,
         Player,
-        Skeleton
+        Skeleton,
+        Sword,
+        Key,
+        Armor,
+        Consumable
     }
 }
