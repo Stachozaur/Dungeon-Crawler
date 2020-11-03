@@ -82,10 +82,6 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             Position = target.Position;
         }
 
-        public void ReceiveDMG(int damage, bool isMagic)
-        {
-        }
-
         public Dictionary<Item, int> GetInventory()
         {
             return _inventory.GetInventory();

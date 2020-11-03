@@ -133,11 +133,6 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             //UI.UpdateInventory(inventory);
         }
 
-        private Dictionary<Item, int> GetInventory()
-        {
-            return _inventory.GetInventory();
-        }
-
         private void PickUpItem(Cell targetCell)
         {
             _inventory.AddLootToInventory(targetCell.Actor.GetInventory());
