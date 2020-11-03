@@ -23,8 +23,7 @@
         Sword,
         Key,
         Armor,
-        Consumable
-        Skeleton,
+        Consumable,
         DoorBlue,
         DoorRed,
         DoorYellow
