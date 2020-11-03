@@ -17,5 +17,6 @@ namespace Codecool.DungeonCrawl.Logic.Interfaces
         int _magicResistance { get; }
 
         int _armor { get; }
+
     }
 }
