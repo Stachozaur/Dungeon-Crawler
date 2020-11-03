@@ -1,6 +1,8 @@
 using System.IO;
+using Codecool.DungeonCrawl.Items;
 using Codecool.DungeonCrawl.Logic.Actors;
 using Perlin.Display;
+using Codecool.DungeonCrawl.Logic.Doors;
 
 namespace Codecool.DungeonCrawl.Logic.Map
 {
@@ -82,7 +84,9 @@ namespace Codecool.DungeonCrawl.Logic.Map
             '.' => TileType.Floor,
             's' => TileType.Floor,
             'p' => TileType.Floor,
-            'd' => TileType.Door,
+            'b' => TileType.DoorBlue,
+            'r' => TileType.DoorRed,
+            'y' => TileType.DoorYellow,
             _ => TileType.Empty
         };
 
@@ -96,6 +100,9 @@ namespace Codecool.DungeonCrawl.Logic.Map
         {
             's' => new Skeleton(cell),
             'p' => new Player(cell),
+            'b' => new Door(cell, DoorKeyType.Blue, TileType.DoorBlue),
+            'r' => new Door(cell, DoorKeyType.Red, TileType.DoorRed),
+            'y' => new Door(cell, DoorKeyType.Yellow, TileType.DoorYellow),
             _ => null
         };
     }

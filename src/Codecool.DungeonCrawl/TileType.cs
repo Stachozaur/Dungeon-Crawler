@@ -7,6 +7,8 @@
         Floor,
         Player,
         Skeleton,
-        Door,
+        DoorBlue,
+        DoorRed,
+        DoorYellow
     }
 }

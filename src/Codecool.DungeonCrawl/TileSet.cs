@@ -29,7 +29,9 @@ namespace Codecool.DungeonCrawl
                 [TileType.Floor] = CreateTile(2, 0),
                 [TileType.Player] = CreateTile(27, 0),
                 [TileType.Skeleton] = CreateTile(29, 6),
-                [TileType.Door] = CreateTile(0, 10)
+                [TileType.DoorBlue] = CreateTile(0, 10),
+                [TileType.DoorRed] = CreateTile(0, 20),
+                [TileType.DoorYellow] = CreateTile(23, 10),
             };
         }
 
