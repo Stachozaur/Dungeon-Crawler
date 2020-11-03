@@ -14,7 +14,8 @@ namespace Codecool.DungeonCrawl.Logic.Actors
     /// 
 
 
-    public class Skeleton : Actor, IPlayerAttributes
+    public class Skeleton : Actor, IPlayerAttributes, IUpdatable
+
     {
         public int _hp { get; private set; } = 20;
         public int _attack { get; private set; } = 5;
@@ -22,11 +23,12 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public int _actionPoints { get; private set; } = 50;
         public int _magicResistance { get; private set; } = 0;
         public int _armor { get; private set; } = 5;
-        private static readonly Random _random = new Random();
+
         private float _timeLastMove;
 
         public Skeleton(Cell cell) : base(cell, TileSet.GetTile(TileType.Skeleton))
         {
+            Program.UpdatablesToAdd.Add(this);
             var lootableItems = new Dictionary<Item, int>
             {
                 { new Weapon("Stinger", 10, true, 10), 1 },
@@ -36,8 +38,6 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             var lootTable = new LootTable(lootableItems);
             _inventory = new Inventory(lootTable.RandomizeLoot());
             bool agressive = IsAggressive();
-            RandomAiMove();
-
         }
 
         private bool IsAggressive()
@@ -54,7 +54,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
 
         public Direction GetRandomDirection()
         {
-            int maxDirection = 3;
+            int maxDirection = 8;
             var direction = (Direction)Program.Rnd.Next(0, maxDirection);
             return direction;
         }
@@ -92,5 +92,14 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             return false;
         }
 
+        public void Update(float deltaTime)
+        {
+            _timeLastMove += deltaTime;
+            if(_timeLastMove >= 1.0f)
+            {
+                _timeLastMove = 0;
+                RandomAiMove();
+            }
+        }
     }
 }
