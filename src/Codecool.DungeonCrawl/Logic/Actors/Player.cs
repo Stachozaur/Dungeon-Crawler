@@ -1,3 +1,5 @@
+using Codecool.DungeonCrawl.Combat;
+using Codecool.DungeonCrawl.Items;
 using Codecool.DungeonCrawl.Logic.Interfaces;
 using Codecool.DungeonCrawl.Logic.Map;
 using Perlin;
@@ -18,9 +20,10 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public int _actionPoints { get; private set; } = 50;
         public int _magicResistance { get; private set; } = 0;
         public int _armor { get; private set; } = 10;
-        private CombatMode _combatMode;
+        private List<Option> _options;
         private List<Ability> _abilityList;
 
+        
         public Player(Cell cell) : base(cell, TileSet.GetTile(TileType.Player))
         {
             Program.UpdatablesToAdd.Add(this);
@@ -28,8 +31,19 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             _abilityList.Add(new Ability(30, 0, "Attack"));
             _abilityList.Add(new Ability(25, 20, "Heal"));
             _abilityList.Add(new Ability(99, 45, "Pyroblast"));
-
+            _options = new List<Option>();
         }
+
+        public List<Option> CombatOptions()
+        {
+            foreach (var ability in _abilityList)
+            {
+                var name = new Option(ability.AbilityName());
+                _options.Add(name);
+            }
+            return _options;
+        }
+
 
         public void Update(float deltaTime)
         {
@@ -65,7 +79,9 @@ namespace Codecool.DungeonCrawl.Logic.Actors
 
             else if (canPass && isActor)
             {
-                _combatMode.RunCombat();
+                var enemy = targetCell.Actor;
+                var CombatMode = new CombatMode(this, enemy);
+                CombatMode.RunCombat();
             }
         }
 

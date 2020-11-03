@@ -6,13 +6,16 @@ namespace Codecool.DungeonCrawl.Combat
 {
     public class Option
     {
-        public string Name { get; }
-        public Action Selected { get; }
-
-        public Option(string name, Action selected)
+        private string _name;
+        public Option(string name)
         {
-            Name = name;
-            Selected = selected;
+            _name = name;
+
+        }
+
+        public string GetAbilityName()
+        {
+            return _name;
         }
     }
 }

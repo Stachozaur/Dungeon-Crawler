@@ -3,25 +3,29 @@ using System;
 using System.Linq;
 using System.Threading;
 using Codecool.DungeonCrawl;
+using Codecool.DungeonCrawl.Logic.Actors;
 
 namespace Codecool.DungeonCrawl.Combat
 {
     public class CombatMode
     {
         private static List<Option> _options;
+        private Player _player;
 
-        static void Menu(string[] args)
+        public CombatMode(Player player, Actor other)
         {
-            _options = new List<Option>
-            {
-                new Option("Thing", () => WriteTemporaryMessage("Hi")),
-                new Option("Another Thing", () =>  WriteTemporaryMessage("How Are You")),
-                new Option("Yet Another Thing", () =>  WriteTemporaryMessage("Today")),
-                new Option("Exit", () => Environment.Exit(0)),
-            };
+            _player = player;
+        }
+
+
+        static void Menu()
+        {
+
+
         }
         public void RunCombat()
         {
+            ConsoleHelper.FightChoiceMenu(true, _player.CombatOptions());
 
         }
     }

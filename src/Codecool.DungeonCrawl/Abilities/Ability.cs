@@ -16,5 +16,10 @@ public class Ability
     {
         
     }
+    
+    public string AbilityName()
+    {
+        return this._name;
+    }
 
 }
