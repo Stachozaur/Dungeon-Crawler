@@ -77,9 +77,5 @@ namespace Codecool.DungeonCrawl.Logic.Map
             var (x, y) = dir.ToVector();
             return GetNeighbour(x, y);
         }
-        public bool IsActor(Actor other)
-        {
-            return Actor?.OnCollision(other) ?? false;
-        }
     }
 }

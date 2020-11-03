@@ -1,6 +1,9 @@
+using Codecool.DungeonCrawl.Combat;
+using Codecool.DungeonCrawl.Items;
 using Codecool.DungeonCrawl.Logic.Interfaces;
 using Codecool.DungeonCrawl.Logic.Map;
 using Perlin;
+using System.Collections.Generic;
 using Veldrid;
 
 namespace Codecool.DungeonCrawl.Logic.Actors
@@ -39,11 +42,19 @@ namespace Codecool.DungeonCrawl.Logic.Actors
                 { new Armor("Iron Chestplate", 20, 0, 10), 1 }
             };
 
+            _inventory = new Inventory(startingItems);
+            AddLootToInventory(newItems);
+            foreach (var item in _inventory.GetInventory())
+            {
+                System.Console.WriteLine($"{item.Key.GetItemName()}: {item.Value}");
+            }
+
             _abilityList = new List<Ability>();
             _abilityList.Add(new Ability(30, 0, "Attack"));
             _abilityList.Add(new Ability(25, 20, "Heal"));
             _abilityList.Add(new Ability(99, 45, "Pyroblast"));
             _options = new List<Option>();
+
         }
 
         public List<Option> CombatOptions()
@@ -55,15 +66,8 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             }
             return _options;
         }
-            _inventory = new Inventory(startingItems);
-            AddLootToInventory(newItems);
-            foreach (var item in _inventory.GetInventory())
-            {
-                System.Console.WriteLine($"{item.Key.GetItemName()}: {item.Value}");
-            }
 
-        }
-
+       
         public void Update(float deltaTime)
         {
             if (KeyboardInput.IsKeyPressedThisFrame(Key.Up))
