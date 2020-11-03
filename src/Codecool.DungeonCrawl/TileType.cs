@@ -15,6 +15,10 @@
         UIborderCornerTopRight,
         UIborderCornerBottomLeft,
         UIborderCornerBottomRaight,
-        textField
+        EmptyInventorySlot,
+        HealingPotion,
+        WoodenShield,
+        ManaPotion,
+        IronChestplate
     }
 }

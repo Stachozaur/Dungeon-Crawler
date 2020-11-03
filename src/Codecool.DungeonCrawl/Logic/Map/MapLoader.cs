@@ -90,6 +90,7 @@ namespace Codecool.DungeonCrawl.Logic.Map
             '>' => TileType.UIborderCornerTopRight,
             '\\' => TileType.UIborderCornerBottomLeft,
             '/' => TileType.UIborderCornerBottomRaight,
+            'X' => TileType.EmptyInventorySlot,
             _ => TileType.Empty
         };
 
