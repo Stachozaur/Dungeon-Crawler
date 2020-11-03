@@ -6,6 +6,7 @@
         Wall,
         Floor,
         Player,
-        Skeleton
+        Skeleton,
+        Door,
     }
 }
