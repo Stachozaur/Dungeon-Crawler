@@ -82,6 +82,15 @@ namespace Codecool.DungeonCrawl.Logic.Map
             '.' => TileType.Floor,
             's' => TileType.Floor,
             'p' => TileType.Floor,
+            '-' => TileType.UIborderHorizontalTop,
+            '_' => TileType.UIborderHorizontalBottom,
+            '!' => TileType.UIborderVerticalLeft,
+            '|' => TileType.UIborderVerticalRight,
+            '<' => TileType.UIborderCornerTopLeft,
+            '>' => TileType.UIborderCornerTopRight,
+            '\\' => TileType.UIborderCornerBottomLeft,
+            '/' => TileType.UIborderCornerBottomRaight,
+            'X' => TileType.EmptyInventorySlot,
             _ => TileType.Empty
         };
 

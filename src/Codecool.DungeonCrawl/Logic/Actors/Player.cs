@@ -117,6 +117,16 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         {
             _inventory.AddLootToInventory(lootedItems);
         }
+        
+        public void UpdateInventory()
+        {
+            var inventory = GetInventory();
+            UI.UpdateInventory(inventory);
+        }
 
+        private Dictionary<Item, int> GetInventory()
+        {
+            return _inventory.GetInventory();
+        }
     }
 }
