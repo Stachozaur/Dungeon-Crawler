@@ -1,7 +1,9 @@
+using Codecool.DungeonCrawl.Combat;
 using Codecool.DungeonCrawl.Items;
 using Codecool.DungeonCrawl.Logic.Interfaces;
 using Codecool.DungeonCrawl.Logic.Map;
 using Perlin;
+using SharpDX;
 using System.Collections.Generic;
 using Veldrid;
 
@@ -18,7 +20,10 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public int _actionPoints { get; private set; } = 50;
         public int _magicResistance { get; private set; } = 0;
         public int _armor { get; private set; } = 10;
+        private List<Option> _options;
+        private List<Ability> _abilityList;
 
+        
         public Player(Cell cell) : base(cell, TileSet.GetTile(TileType.Player))
         {
             Program.UpdatablesToAdd.Add(this);
@@ -38,7 +43,6 @@ namespace Codecool.DungeonCrawl.Logic.Actors
                 { new Armor("Iron Chestplate", 20, 0, 10), 1 }
             };
 
-
             _inventory = new Inventory(startingItems);
             AddLootToInventory(newItems);
             foreach (var item in _inventory.GetInventory())
@@ -46,8 +50,25 @@ namespace Codecool.DungeonCrawl.Logic.Actors
                 System.Console.WriteLine($"{item.Key.GetItemName()}: {item.Value}");
             }
 
+            _abilityList = new List<Ability>();
+            _abilityList.Add(new Ability(30, 0, "Attack"));
+            _abilityList.Add(new Ability(25, 20, "Heal"));
+            _abilityList.Add(new Ability(99, 45, "Pyroblast"));
+            _options = new List<Option>();
+
         }
 
+        public List<Option> CombatOptions()
+        {
+            foreach (var ability in _abilityList)
+            {
+                var name = new Option(ability.AbilityName());
+                _options.Add(name);
+            }
+            return _options;
+        }
+
+       
         public void Update(float deltaTime)
         {
             if (KeyboardInput.IsKeyPressedThisFrame(Key.Up))
@@ -79,22 +100,48 @@ namespace Codecool.DungeonCrawl.Logic.Actors
 
             if (canPass && !isActor)
                 AssignCell(targetCell);
-            
+
             else if (canPass && isActor)
             {
-                System.Console.WriteLine("dupa");
+                if (targetCell.Actor is ItemActor)
+                {
+                    PickUpItem(targetCell);
+                    AssignCell(targetCell);
+                }
+                else
+                {
+                    var enemy = targetCell.Actor;
+                    var CombatMode = new CombatMode(this, enemy);
+                    CombatMode.RunCombat();
+                }
             }
         }
 
         public override bool OnCollision(Actor other)
         {
-            // TODO Receive damage logic
             return false;
         }
 
         public void AddLootToInventory(Dictionary<Item, int> lootedItems)
         {
             _inventory.AddLootToInventory(lootedItems);
+        }
+        
+        public void UpdateInventory()
+        {
+            var inventory = GetInventory();
+            //UI.UpdateInventory(inventory);
+        }
+
+        private void PickUpItem(Cell targetCell)
+        {
+            _inventory.AddLootToInventory(targetCell.Actor.GetInventory());
+            targetCell.Actor.Destroy();
+            targetCell.Actor = null;
+            foreach (var item in _inventory.GetInventory())
+            {
+                System.Console.WriteLine($"{item.Key.GetItemName()}: {item.Value}");
+            }
         }
     }
 }

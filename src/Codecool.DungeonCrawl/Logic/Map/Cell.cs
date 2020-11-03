@@ -52,7 +52,7 @@ namespace Codecool.DungeonCrawl.Logic.Map
         /// <returns>Whether the other Actor can walk on this cell</returns>
         public bool OnCollision(Actor other)
         {
-            System.Console.WriteLine(Type);
+            System.Console.WriteLine(Actor);
             return Type.IsPassable() && (Actor?.OnCollision(other) ?? true);
         }
 
@@ -77,5 +77,6 @@ namespace Codecool.DungeonCrawl.Logic.Map
             var (x, y) = dir.ToVector();
             return GetNeighbour(x, y);
         }
+
     }
 }

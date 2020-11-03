@@ -3,6 +3,7 @@ using Codecool.DungeonCrawl.Items;
 using Codecool.DungeonCrawl.Logic.Actors;
 using Perlin.Display;
 using Codecool.DungeonCrawl.Logic.Doors;
+using Codecool.DungeonCrawl;
 
 namespace Codecool.DungeonCrawl.Logic.Map
 {
@@ -84,6 +85,19 @@ namespace Codecool.DungeonCrawl.Logic.Map
             '.' => TileType.Floor,
             's' => TileType.Floor,
             'p' => TileType.Floor,
+            '-' => TileType.UIborderHorizontalTop,
+            '_' => TileType.UIborderHorizontalBottom,
+            '!' => TileType.UIborderVerticalLeft,
+            '|' => TileType.UIborderVerticalRight,
+            '<' => TileType.UIborderCornerTopLeft,
+            '>' => TileType.UIborderCornerTopRight,
+            '\\' => TileType.UIborderCornerBottomLeft,
+            '/' => TileType.UIborderCornerBottomRaight,
+            'X' => TileType.EmptyInventorySlot,
+            'w' => TileType.Floor,
+            'a' => TileType.Floor,
+            'c' => TileType.Floor,
+            'k' => TileType.Floor,
             'b' => TileType.DoorBlue,
             'r' => TileType.DoorRed,
             'y' => TileType.DoorYellow,
@@ -103,6 +117,7 @@ namespace Codecool.DungeonCrawl.Logic.Map
             'b' => new Door(cell, DoorKeyType.Blue, TileType.DoorBlue),
             'r' => new Door(cell, DoorKeyType.Red, TileType.DoorRed),
             'y' => new Door(cell, DoorKeyType.Yellow, TileType.DoorYellow),
+            'w' => new ItemActor(cell, new Weapon("Dupa", Program.Rnd.Next(5, 15), false, 100)),
             _ => null
         };
     }

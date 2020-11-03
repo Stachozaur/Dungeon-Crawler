@@ -14,6 +14,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
     public abstract class Actor
     {
         protected Inventory _inventory;
+
         // default ctor
         protected Actor(Cell cell, Rectangle tile)
         {
@@ -50,11 +51,11 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public void Destroy()
         {
             Sprite.Parent.RemoveChild(Sprite);
-			
-			if (this is IUpdatable updatable)
-			{
-				Program.UpdatablesToRemove.Add(updatable);
-			}
+
+            if (this is IUpdatable updatable)
+            {
+                Program.UpdatablesToRemove.Add(updatable);
+            }
         }
 
         public Cell Cell { get; private set; }
@@ -88,9 +89,9 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             Position = target.Position;
         }
 
-        public void ReceiveDMG(int damage, bool isMagic)
+        public Dictionary<Item, int> GetInventory()
         {
-
+            return _inventory.GetInventory();
         }
     }
 }
