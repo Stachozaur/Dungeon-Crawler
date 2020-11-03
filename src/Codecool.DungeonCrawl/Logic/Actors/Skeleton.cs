@@ -37,7 +37,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             };
             var lootTable = new LootTable(lootableItems);
             _inventory = new Inventory(lootTable.RandomizeLoot());
-            bool agressive = IsAggressive();
+            bool isAgressive = IsAggressive();
         }
 
         private bool IsAggressive()
@@ -45,11 +45,16 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             return Program.Rnd.Next(100) % 2 == 0;
         }
 
-        private bool AggressiveRunStart(Player player)
+        private bool AggressiveRunCheck(Player player)
         {
             int CriticalDistance = 3;
             (int x, int y) distance = GetDistanceToPlayer(player);
             return distance.x <= CriticalDistance || distance.y <= CriticalDistance;
+        }
+
+        private void AggressiveRunStart(Player player)
+        {
+            
         }
 
         public Direction GetRandomDirection()
@@ -69,8 +74,9 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         {
             var targetCell = Cell.GetNeighbour(dir);
             var canPass = targetCell?.OnCollision(this) ?? false;
+            var isActor = targetCell?.IsActor(this) ?? false;
 
-            if (canPass)
+            if (canPass && !isActor)
             {
                 AssignCell(targetCell);
             }

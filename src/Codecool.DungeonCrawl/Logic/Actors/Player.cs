@@ -121,7 +121,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public void UpdateInventory()
         {
             var inventory = GetInventory();
-            UI.UpdateInventory(inventory);
+            //UI.UpdateInventory(inventory);
         }
 
         private Dictionary<Item, int> GetInventory()

@@ -25,7 +25,7 @@ namespace Codecool.DungeonCrawl
         /// <summary>
         ///     Entry point
         /// </summary>
-        public static Random Rnd = new Random();
+        public static readonly Random Rnd = new Random();
         public static void Main()
         {
             var (width, height) = MapLoader.GetMapDimensions();

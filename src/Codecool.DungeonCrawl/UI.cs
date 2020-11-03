@@ -9,6 +9,7 @@ using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using Codecool.DungeonCrawl.Logic.Map;
 using Perlin.Geom;
+using Codecool.DungeonCrawl.Combat;
 
 namespace Codecool.DungeonCrawl
 {
@@ -36,52 +37,53 @@ namespace Codecool.DungeonCrawl
             CombatHeader.X = 920;
             CombatHeader.Y = 340;
             PerlinApp.Stage.AddChild(CombatHeader);
-        }
-
-
-        public static void UpdateInventory(Dictionary<Item, int> inventory)
-        {
             
-            foreach (var item in inventory)
-            {
-                
-                    foreach (var slot in InventorySlots)
-                    {
-                        
-                        if (item.Key is Weapon)
-                        {
-                            var cell = new Cell(slot.x, slot.y, ,TileSet.GetTile(TileType.EmptyInventorySlot));
-                            var inventoryItem = new UIInventoryActor(cell);
-                            
-                            
-                            cell.
-                        }
-                        
-                        
-                        public void AssignCell(Cell target)
-                        {
-                            Cell.Actor = null;
-                            Cell = target;
-                            target.Actor = this;
-
-                            Position = target.Position;
-                        }
-
-
-                        var InventoryItem = new Actor();
-
-
-                        // var tile = TileSet.GetTile(TileType.EmptyInventorySlot);
-                        var targetCell = new Cell(slot.x, slot.y, new Sprite(), TileType.EmptyInventorySlot);
-                        // targetCell.Sprite = new Sprite("tiles.png", false, tile);
-
-                        var character = line[x];
-
-                        // Cell type assignment
-                        var cellType = GetCellType(character);
-                        var cell = new Cell(x, y, cellParent, cellType);
-                    }
-            }
         }
+
+
+        //public static void UpdateInventory(Dictionary<Item, int> inventory)
+        //{
+            
+        //    foreach (var item in inventory)
+        //    {
+                
+        //            foreach (var slot in InventorySlots)
+        //            {
+                        
+        //                if (item.Key is Weapon)
+        //                {
+        //                    var cell = new Cell(slot.x, slot.y, ,TileSet.GetTile(TileType.EmptyInventorySlot));
+        //                    var inventoryItem = new UIInventoryActor(cell);
+                            
+                            
+        //                    cell.
+        //                }
+                        
+                        
+        //                public void AssignCell(Cell target)
+        //                {
+        //                    Cell.Actor = null;
+        //                    Cell = target;
+        //                    target.Actor = this;
+
+        //                    Position = target.Position;
+        //                }
+
+
+        //                var InventoryItem = new Actor();
+
+
+        //                // var tile = TileSet.GetTile(TileType.EmptyInventorySlot);
+        //                var targetCell = new Cell(slot.x, slot.y, new Sprite(), TileType.EmptyInventorySlot);
+        //                // targetCell.Sprite = new Sprite("tiles.png", false, tile);
+
+        //                var character = line[x];
+
+        //                // Cell type assignment
+        //                var cellType = GetCellType(character);
+        //                var cell = new Cell(x, y, cellParent, cellType);
+        //            }
+        //    }
+        //}
     }
 }
