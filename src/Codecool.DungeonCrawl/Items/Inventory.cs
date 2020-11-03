@@ -1,14 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Codecool.DungeonCrawl.Items
 {
-    public class Inventory
+    public partial class Inventory
     {
-        public Inventory()
+        private Dictionary<Item, int> _inventory;
+
+        public Inventory(Dictionary<Item, int> startingItems)
         {
-           
+            _inventory = startingItems;
+        }
+
+        public Dictionary<Item, int> GetInventory()
+        {
+            return _inventory;
+        }
+
+        public void AddLootToInventory(Dictionary<Item, int> lootedItems)
+        {
+            var inventoryCopy = new Dictionary<Item, int>(_inventory);
+
+            foreach (var item in lootedItems)
+            {
+                var matchFound = false;
+                foreach (var inventoryItem in inventoryCopy)
+                {
+                    if (item.Key.GetItemName() == inventoryItem.Key.GetItemName())
+                    {
+                        _inventory[inventoryItem.Key] += item.Value;
+                        matchFound = true;
+                        break;
+                    }
+                }
+                if (!matchFound)
+                {
+                    _inventory.Add(item.Key, item.Value);
+                }
+            }
         }
     }
 }

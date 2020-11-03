@@ -13,7 +13,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
     /// </summary>
     public abstract class Actor
     {
-        private Inventory _inventory;
+        protected Inventory _inventory;
         // default ctor
         protected Actor(Cell cell, Rectangle tile)
         {
@@ -83,7 +83,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
 
         public void ReceiveDMG(int damage, bool isMagic)
         {
-        }
 
+        }
     }
 }

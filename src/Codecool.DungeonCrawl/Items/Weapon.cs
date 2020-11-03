@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Codecool.DungeonCrawl.Items
+﻿namespace Codecool.DungeonCrawl.Items
 {
     class Weapon : Item
     {
@@ -10,11 +6,12 @@ namespace Codecool.DungeonCrawl.Items
 
         private bool _isMagic;
         
-        public Weapon(string name, int attack, bool isMagic)
+        public Weapon(string name, int attack, bool isMagic, int droprate)
         {
             _name = name;
             _attack = attack;
             _isMagic = isMagic;
+            _droprate = droprate;
             _value = _attack * 10;
         }
     }

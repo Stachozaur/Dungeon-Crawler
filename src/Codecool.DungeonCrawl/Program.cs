@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Codecool.DungeonCrawl.Logic.Actors;
 using Codecool.DungeonCrawl.Logic.Interfaces;
 using Codecool.DungeonCrawl.Logic.Map;
 using Perlin;
