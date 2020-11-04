@@ -99,19 +99,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             var targetCell = Cell.GetNeighbour(dir);
             var canPass = targetCell?.OnCollision(this) ?? false;
             var isActor = targetCell?.IsActor(this) ?? false;
-            if (targetCell.Actor is Door)
-            { /*System.Console.WriteLine("kurwa");*/
-                var colorDoor = targetCell.Actor as Door;
-                if (colorDoor.IsKeyMatch(this, colorDoor.GetDoorType()))
-                {
-                    //targetCell.Actor.Cell = null;
-                    targetCell.Actor.Destroy();
-                    targetCell.Actor = null;
-                    AssignCell(targetCell);
-                    targetCell.Type = TileType.Floor;
-                    
-                }
-            }
+
             if (canPass && !isActor)
                 AssignCell(targetCell);
 
@@ -121,6 +109,21 @@ namespace Codecool.DungeonCrawl.Logic.Actors
                 {
                     PickUpItem(targetCell);
                     AssignCell(targetCell);
+                }
+                else if (targetCell.Actor is Door)
+                {
+                    System.Console.WriteLine("kurwa");
+                    var colorDoor = targetCell.Actor as Door;
+                    if (colorDoor.IsKeyMatch(this, colorDoor.GetDoorType()))
+                    {
+                        //targetCell.Actor.Cell = null;
+                        targetCell.Actor.Destroy();
+                        targetCell.Actor = null;
+                        targetCell.Type = TileType.Floor;
+                        AssignCell(targetCell);
+
+
+                    }
                 }
 
                 else

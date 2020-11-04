@@ -33,12 +33,12 @@ namespace Codecool.DungeonCrawl.Logic.Doors
             {
                 if (item.Key is DoorKey)
                 {
-                    Console.WriteLine("oh yeahh");
                     var doorKey = item.Key as DoorKey;
-                    //doorKey
-                    //(DoorKey)item.Key.GetKeyType();
-                    //== door.GetDoorType();
-                    return true;
+                    if(doorKey.GetKeyType() == color)
+                    {
+                        //player.RemoveFromInventory(item.Key);   
+                        return true;
+                    }
                 }
             }
             return false;
