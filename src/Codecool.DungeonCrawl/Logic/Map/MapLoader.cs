@@ -96,7 +96,8 @@ namespace Codecool.DungeonCrawl.Logic.Map
             'X' => TileType.EmptyInventorySlot,
             'w' => TileType.Floor,
             'a' => TileType.Floor,
-            'c' => TileType.Floor,
+            'm' => TileType.Floor,
+            'h' => TileType.Floor,
             'k' => TileType.Floor,
             _ => TileType.Empty
         };
@@ -112,6 +113,9 @@ namespace Codecool.DungeonCrawl.Logic.Map
             's' => new Skeleton(cell),
             'p' => new Player(cell),
             'w' => new ItemActor(cell, new Weapon($"{Utilities.RandomItemName("Sword")}", Program.Rnd.Next(5, 15), false, 100)),
+            'a' => new ItemActor(cell, new Armor($"{Utilities.RandomItemName("Armor")}", Program.Rnd.Next(1, 10), Program.Rnd.Next(1, 10), 100)),
+            'm' => new ItemActor(cell, new Consumable("Mana Potion", 20, false, 100)),
+            'h' => new ItemActor(cell, new Consumable("Healing Potion", 20, true, 100)),
             _ => null
         };
     }
