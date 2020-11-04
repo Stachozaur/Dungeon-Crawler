@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.Intrinsics.X86;
 using System.Threading.Tasks;
 using Codecool.DungeonCrawl.Items;
+using Codecool.DungeonCrawl.Logic.Actors;
 using Perlin;
 using Perlin.Display;
 using SixLabors.Fonts;
@@ -14,12 +16,22 @@ using Codecool.DungeonCrawl.Combat;
 namespace Codecool.DungeonCrawl
 {
     public static partial class UI
+
     {
         private static List<(int x, int y)> InventorySlots = new List<(int, int)>
         {
-            (4, 27),
-            (5, 27),
-            (6, 27),
+            (27, 3),
+            (28, 3),
+            (29, 3),
+            (30, 3),
+            (31, 3),
+            (32, 3),
+            (27, 4),
+            (28, 4),
+            (29, 4),
+            (30, 4),
+            (31, 4),
+            (32, 4),
         };
 
         public static void DisplayUIHeaders()
@@ -37,53 +49,40 @@ namespace Codecool.DungeonCrawl
             CombatHeader.X = 920;
             CombatHeader.Y = 340;
             PerlinApp.Stage.AddChild(CombatHeader);
-            
         }
 
+        public static void UpdateInventory(Dictionary<Item, int> inventory)
+        {
+            var inventoryReference = new Dictionary<Item, int>();
+            var map = Program.Map;
+            foreach (var slot in InventorySlots)
+            {
+                foreach (var item in inventory)
+                {
+                    {
+                        var cell = map.GetCell(slot.x, slot.y);
+                        if (cell.Type == TileType.EmptyInventorySlot && !inventoryReference.ContainsKey(item.Key))
+                        {
+                            cell.Actor = new UIInventoryActor(cell, item.Key);
+                            inventoryReference.Add(item.Key, item.Value);
+                            DisplayItemQuantity(item.Value, (slot.x, slot.y));
+                            break;
+                        }
+                    }
+                }
+            }
+        }
 
-        //public static void UpdateInventory(Dictionary<Item, int> inventory)
-        //{
-            
-        //    foreach (var item in inventory)
-        //    {
-                
-        //            foreach (var slot in InventorySlots)
-        //            {
-                        
-        //                if (item.Key is Weapon)
-        //                {
-        //                    var cell = new Cell(slot.x, slot.y, ,TileSet.GetTile(TileType.EmptyInventorySlot));
-        //                    var inventoryItem = new UIInventoryActor(cell);
-                            
-                            
-        //                    cell.
-        //                }
-                        
-                        
-        //                public void AssignCell(Cell target)
-        //                {
-        //                    Cell.Actor = null;
-        //                    Cell = target;
-        //                    target.Actor = this;
-
-        //                    Position = target.Position;
-        //                }
-
-
-        //                var InventoryItem = new Actor();
-
-
-        //                // var tile = TileSet.GetTile(TileType.EmptyInventorySlot);
-        //                var targetCell = new Cell(slot.x, slot.y, new Sprite(), TileType.EmptyInventorySlot);
-        //                // targetCell.Sprite = new Sprite("tiles.png", false, tile);
-
-        //                var character = line[x];
-
-        //                // Cell type assignment
-        //                var cellType = GetCellType(character);
-        //                var cell = new Cell(x, y, cellParent, cellType);
-        //            }
-        //    }
-        //}
+        private static void DisplayItemQuantity(int number, (int x,int y) position)
+        {
+            var textField = new TextField(PerlinApp.FontRobotoMono.CreateFont(8));
+            textField.Text =String.Format( " {0} ", number.ToString());
+            textField.BackgroundColor = Color.FloralWhite;
+            textField.FontColor = Color.Black;
+            textField.X = (position.x * TileSet.Size)*TileSet.Scale+20;
+            textField.Y = (position.y * TileSet.Size)*TileSet.Scale+20;
+            PerlinApp.Stage.AddChild(textField);
+        }
     }
 }
+

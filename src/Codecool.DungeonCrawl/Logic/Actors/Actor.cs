@@ -18,6 +18,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         // default ctor
         protected Actor(Cell cell, Rectangle tile)
         {
+            
             Cell = cell;
             Cell.Actor = this;
 

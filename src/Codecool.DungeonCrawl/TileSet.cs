@@ -31,18 +31,20 @@ namespace Codecool.DungeonCrawl
                 [TileType.Skeleton] = CreateTile(29, 6),
                 [TileType.UIborderHorizontalTop] = CreateTile(17, 19),
                 [TileType.UIborderVerticalLeft] = CreateTile(16, 20),
-                [TileType.UIborderHorizontalBottom] = CreateTile(17,21),
+                [TileType.UIborderHorizontalBottom] = CreateTile(17, 21),
                 [TileType.UIborderVerticalRight] = CreateTile(18, 20),
                 [TileType.UIborderCornerBottomLeft] = CreateTile(16, 21),
                 [TileType.UIborderCornerBottomRaight] = CreateTile(18, 21),
                 [TileType.UIborderCornerTopLeft] = CreateTile(16, 19),
                 [TileType.UIborderCornerTopRight] = CreateTile(18, 19),
-                [TileType.EmptyInventorySlot] = CreateTile(23,26),
-                [TileType.HealingPotion] = CreateTile(17,24),
-                [TileType.WoodenShield] = CreateTile(8,24),
-                [TileType.ManaPotion] = CreateTile(16,25),
-                [TileType.IronChestplate] = CreateTile(0,23),
-                [TileType.Sword] = CreateTile(0, 29)
+                [TileType.EmptyInventorySlot] = CreateTile(23, 26),
+                [TileType.HealingPotion] = CreateTile(24, 17),
+                [TileType.WoodenShield] = CreateTile(8, 24),
+                [TileType.ManaPotion] = CreateTile(16, 25),
+                [TileType.IronChestplate] = CreateTile(0, 23),
+                [TileType.Sword] = CreateTile(0, 29),
+                [TileType.Consumable] = CreateTile(16, 28),
+                [TileType.Armor] = CreateTile(0, 23)
             };
         }
 

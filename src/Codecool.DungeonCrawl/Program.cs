@@ -85,5 +85,7 @@ namespace Codecool.DungeonCrawl
 			
             AllUpdatables.ForEach(x => x.Update(deltaTime));
         }
+
+       
     }
 }

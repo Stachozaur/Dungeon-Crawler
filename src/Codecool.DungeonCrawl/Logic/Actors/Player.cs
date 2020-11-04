@@ -106,6 +106,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
                 if (targetCell.Actor is ItemActor)
                 {
                     PickUpItem(targetCell);
+                    UI.UpdateInventory(GetInventory());
                     AssignCell(targetCell);
                 }
                 else
@@ -129,6 +130,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         
         public void UpdateInventory()
         {
+            
             var inventory = GetInventory();
             //UI.UpdateInventory(inventory);
         }
