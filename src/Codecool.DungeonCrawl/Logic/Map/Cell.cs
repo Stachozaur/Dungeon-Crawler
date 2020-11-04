@@ -1,4 +1,5 @@
 using Codecool.DungeonCrawl.Logic.Actors;
+using Codecool.DungeonCrawl.Logic.Doors;
 using Perlin.Display;
 
 namespace Codecool.DungeonCrawl.Logic.Map
@@ -52,6 +53,7 @@ namespace Codecool.DungeonCrawl.Logic.Map
         /// <returns>Whether the other Actor can walk on this cell</returns>
         public bool OnCollision(Actor other)
         {
+            
             System.Console.WriteLine(Actor);
             return Type.IsPassable() && (Actor?.OnCollision(other) ?? true);
         }

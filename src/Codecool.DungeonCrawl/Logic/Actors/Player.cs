@@ -6,6 +6,7 @@ using Perlin;
 using SharpDX;
 using System.Collections.Generic;
 using Veldrid;
+using Codecool.DungeonCrawl.Logic.Doors;
 
 namespace Codecool.DungeonCrawl.Logic.Actors
 {
@@ -23,7 +24,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         private List<Option> _options;
         private List<Ability> _abilityList;
 
-        
+
         public Player(Cell cell) : base(cell, TileSet.GetTile(TileType.Player))
         {
             Program.UpdatablesToAdd.Add(this);
@@ -33,6 +34,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
                 { new Consumable("Healing Potion", 10, true, 50), 1 },
                 { new Armor("Wooden Armor", 10, 0, 10), 1 },
                 { new Consumable("Mana Potion", 10, true, 50), 1 },
+                { new DoorKey( DoorKeyType.Blue ), 1 }
             };
             var newItems = new Dictionary<Item, int>
             {
@@ -68,7 +70,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             return _options;
         }
 
-       
+
         public void Update(float deltaTime)
         {
             if (KeyboardInput.IsKeyPressedThisFrame(Key.Up))
@@ -97,7 +99,19 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             var targetCell = Cell.GetNeighbour(dir);
             var canPass = targetCell?.OnCollision(this) ?? false;
             var isActor = targetCell?.IsActor(this) ?? false;
-
+            if (targetCell.Actor is Door)
+            { /*System.Console.WriteLine("kurwa");*/
+                var colorDoor = targetCell.Actor as Door;
+                if (colorDoor.IsKeyMatch(this, colorDoor.GetDoorType()))
+                {
+                    //targetCell.Actor.Cell = null;
+                    targetCell.Actor.Destroy();
+                    targetCell.Actor = null;
+                    AssignCell(targetCell);
+                    targetCell.Type = TileType.Floor;
+                    
+                }
+            }
             if (canPass && !isActor)
                 AssignCell(targetCell);
 
@@ -108,6 +122,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
                     PickUpItem(targetCell);
                     AssignCell(targetCell);
                 }
+
                 else
                 {
                     var enemy = targetCell.Actor;
@@ -115,6 +130,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
                     CombatMode.RunCombat();
                 }
             }
+
         }
 
         public override bool OnCollision(Actor other)
@@ -126,7 +142,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         {
             _inventory.AddLootToInventory(lootedItems);
         }
-        
+
         public void UpdateInventory()
         {
             var inventory = GetInventory();

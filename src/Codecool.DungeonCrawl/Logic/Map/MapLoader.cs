@@ -100,7 +100,7 @@ namespace Codecool.DungeonCrawl.Logic.Map
             'k' => TileType.Floor,
             'b' => TileType.DoorBlue,
             'r' => TileType.DoorRed,
-            'y' => TileType.DoorYellow,
+            'y' => TileType.DoorYellow,  
             _ => TileType.Empty
         };
 
