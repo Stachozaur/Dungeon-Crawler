@@ -1,5 +1,7 @@
 using Codecool.DungeonCrawl.Logic.Actors;
 using Perlin.Display;
+using System.Collections.Generic;
+using System.Numerics;
 
 namespace Codecool.DungeonCrawl.Logic.Map
 {
@@ -77,6 +79,7 @@ namespace Codecool.DungeonCrawl.Logic.Map
             var (x, y) = dir.ToVector();
             return GetNeighbour(x, y);
         }
+
 
     }
 }

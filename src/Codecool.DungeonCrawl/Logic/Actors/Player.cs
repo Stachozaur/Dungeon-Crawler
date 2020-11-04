@@ -21,8 +21,9 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public int _armor { get; private set; } = 10;
         private List<Option> _options;
         private List<Ability> _abilityList;
+        public static Player Singleton { get; private set; }
 
-        
+
         public Player(Cell cell) : base(cell, TileSet.GetTile(TileType.Player))
         {
             Program.UpdatablesToAdd.Add(this);
@@ -54,6 +55,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             _abilityList.Add(new Ability(25, 20, "Heal"));
             _abilityList.Add(new Ability(99, 45, "Pyroblast"));
             _options = new List<Option>();
+            Singleton = this;
 
         }
 
@@ -100,12 +102,12 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             if (canPass && !isActor)
                 AssignCell(targetCell);
 
-            else if (canPass && isActor)
-            {
-                var enemy = targetCell.Actor;
-                var CombatMode = new CombatMode(this, enemy);
-                CombatMode.RunCombat();
-            }
+            //else if (canPass && isActor)
+            //{
+            //    var enemy = targetCell.Actor;
+            //    var CombatMode = new CombatMode(this, enemy);
+            //    CombatMode.RunCombat();
+            //}
         }
 
         public override bool OnCollision(Actor other)
