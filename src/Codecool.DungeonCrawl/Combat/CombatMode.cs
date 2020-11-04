@@ -26,6 +26,7 @@ namespace Codecool.DungeonCrawl.Combat
         public void RunCombat()
         {
             ConsoleHelper.FightChoiceMenu(true, _player.CombatOptions());
+            
 
         }
     }

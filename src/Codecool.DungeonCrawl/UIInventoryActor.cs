@@ -9,9 +9,9 @@ namespace Codecool.DungeonCrawl
     {
         public class UIInventoryActor : Actor
         {
-            public UIInventoryActor(Cell cell, Item item)  : base(cell, TileSet.GetTile(item.type))
+            public UIInventoryActor(Cell cell, TileType tile) : base(cell, TileSet.GetTile(tile))
             {
-                
+
             }
         }
     }

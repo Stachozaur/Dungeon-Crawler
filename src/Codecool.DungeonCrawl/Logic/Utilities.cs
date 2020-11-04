@@ -41,10 +41,15 @@ namespace Codecool.DungeonCrawl.Logic
 
         public static string RandomItemName(string itemName)
         {
-            var randomPrefix = (RandomNames)Program.Rnd.Next(Enum.GetNames(typeof(RandomNames)).Length);
+            var randomPrefix = (RandomNames) Program.Rnd.Next(Enum.GetNames(typeof(RandomNames)).Length);
             var fullString = $"{randomPrefix} {itemName}";
             return fullString;
         }
+
+        public static string GetLastWord(string name)
+        {
+            var words = name.Split(' ');
+            return words[words.Length - 1];
+        }
     }
 }
-

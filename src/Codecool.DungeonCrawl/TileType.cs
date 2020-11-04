@@ -23,6 +23,8 @@
         Sword,
         Key,
         Armor,
-        Consumable
+        Consumable,
+        Hammer,
+        Arrows
     }
 }
