@@ -4,6 +4,7 @@ using Codecool.DungeonCrawl.Logic.Actors;
 using Perlin.Display;
 using Codecool.DungeonCrawl.Logic.Doors;
 using Codecool.DungeonCrawl;
+using System;
 
 namespace Codecool.DungeonCrawl.Logic.Map
 {
@@ -96,7 +97,8 @@ namespace Codecool.DungeonCrawl.Logic.Map
             'X' => TileType.EmptyInventorySlot,
             'w' => TileType.Floor,
             'a' => TileType.Floor,
-            'c' => TileType.Floor,
+            'm' => TileType.Floor,
+            'h' => TileType.Floor,
             'k' => TileType.Floor,
             'b' => TileType.Floor,
             'r' => TileType.Floor,
@@ -118,6 +120,10 @@ namespace Codecool.DungeonCrawl.Logic.Map
             'r' => new Door(cell, DoorKeyType.Red, TileType.DoorRed),
             'y' => new Door(cell, DoorKeyType.Yellow, TileType.DoorYellow),
             'w' => new ItemActor(cell, new Weapon("Dupa", Program.Rnd.Next(5, 15), false, 100)),
+            'w' => new ItemActor(cell, new Weapon($"{Utilities.RandomItemName("Sword")}", Program.Rnd.Next(5, 15), false, 100)),
+            'a' => new ItemActor(cell, new Armor($"{Utilities.RandomItemName("Armor")}", Program.Rnd.Next(1, 10), Program.Rnd.Next(1, 10), 100)),
+            'm' => new ItemActor(cell, new Consumable("Mana Potion", 20, false, 100)),
+            'h' => new ItemActor(cell, new Consumable("Healing Potion", 20, true, 100)),
             _ => null
         };
     }

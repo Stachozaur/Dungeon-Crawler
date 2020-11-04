@@ -13,7 +13,7 @@
             _magicResistance = magicResistance;
             _droprate = droprate;
             _value = (_magicResistance + _armor) * 4;
-            type = TileType.Armor;
+            type = TileType.WoodenShield;
         }
     }
 }

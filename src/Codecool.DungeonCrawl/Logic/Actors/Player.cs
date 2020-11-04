@@ -152,6 +152,11 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             //UI.UpdateInventory(inventory);
         }
 
+        public void RemoveItemFromInventory(Item item)
+        {
+            _inventory.RemoveItemFromInventory(item);
+        }
+
         private void PickUpItem(Cell targetCell)
         {
             _inventory.AddLootToInventory(targetCell.Actor.GetInventory());

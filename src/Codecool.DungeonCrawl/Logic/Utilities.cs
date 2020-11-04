@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Codecool.DungeonCrawl.Items;
+using System;
 
 namespace Codecool.DungeonCrawl.Logic
 {
@@ -41,9 +42,11 @@ namespace Codecool.DungeonCrawl.Logic
             _ => true
         };
 
-        public static void AddToInventory()
+        public static string RandomItemName(string itemName)
         {
-            
+            var randomPrefix = (RandomNames)Program.Rnd.Next(Enum.GetNames(typeof(RandomNames)).Length);
+            var fullString = $"{randomPrefix} {itemName}";
+            return fullString;
         }
     }
 }
