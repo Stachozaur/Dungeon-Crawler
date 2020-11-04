@@ -23,6 +23,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public int _armor { get; private set; } = 10;
         private List<Option> _options;
         private List<Ability> _abilityList;
+        public static Player Singleton { get; private set; }
 
 
         public Player(Cell cell) : base(cell, TileSet.GetTile(TileType.Player))
@@ -57,6 +58,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             _abilityList.Add(new Ability(25, 20, "Heal"));
             _abilityList.Add(new Ability(99, 45, "Pyroblast"));
             _options = new List<Option>();
+            Singleton = this;
 
         }
 
