@@ -3,6 +3,7 @@ using Codecool.DungeonCrawl.Items;
 using Codecool.DungeonCrawl.Logic.Actors;
 using Perlin.Display;
 using Codecool.DungeonCrawl;
+using System;
 
 namespace Codecool.DungeonCrawl.Logic.Map
 {
@@ -110,7 +111,7 @@ namespace Codecool.DungeonCrawl.Logic.Map
         {
             's' => new Skeleton(cell),
             'p' => new Player(cell),
-            'w' => new ItemActor(cell, new Weapon("Dupa", Program.Rnd.Next(5, 15), false, 100)),
+            'w' => new ItemActor(cell, new Weapon($"{Utilities.RandomItemName("Sword")}", Program.Rnd.Next(5, 15), false, 100)),
             _ => null
         };
     }
