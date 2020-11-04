@@ -122,7 +122,6 @@ namespace Codecool.DungeonCrawl.Logic.Actors
                         targetCell.Type = TileType.Floor;
                         AssignCell(targetCell);
 
-
                     }
                 }
 
@@ -154,7 +153,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
 
         public void RemoveItemFromInventory(Item item)
         {
-            _inventory.RemoveItemFromInventory(item);
+            //_inventory.RemoveItemFromInventory(item);
         }
 
         private void PickUpItem(Cell targetCell)

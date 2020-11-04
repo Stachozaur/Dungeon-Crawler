@@ -36,7 +36,7 @@ namespace Codecool.DungeonCrawl.Logic.Doors
                     var doorKey = item.Key as DoorKey;
                     if(doorKey.GetKeyType() == color)
                     {
-                        //player.RemoveFromInventory(item.Key);   
+                        player.RemoveItemFromInventory(item.Key);
                         return true;
                     }
                 }

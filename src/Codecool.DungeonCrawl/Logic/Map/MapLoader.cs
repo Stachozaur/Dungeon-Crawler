@@ -119,7 +119,6 @@ namespace Codecool.DungeonCrawl.Logic.Map
             'b' => new Door(cell, DoorKeyType.Blue, TileType.DoorBlue),
             'r' => new Door(cell, DoorKeyType.Red, TileType.DoorRed),
             'y' => new Door(cell, DoorKeyType.Yellow, TileType.DoorYellow),
-            'w' => new ItemActor(cell, new Weapon("Dupa", Program.Rnd.Next(5, 15), false, 100)),
             'w' => new ItemActor(cell, new Weapon($"{Utilities.RandomItemName("Sword")}", Program.Rnd.Next(5, 15), false, 100)),
             'a' => new ItemActor(cell, new Armor($"{Utilities.RandomItemName("Armor")}", Program.Rnd.Next(1, 10), Program.Rnd.Next(1, 10), 100)),
             'm' => new ItemActor(cell, new Consumable("Mana Potion", 20, false, 100)),
