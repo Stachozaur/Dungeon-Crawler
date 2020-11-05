@@ -24,8 +24,7 @@
         Key,
         Armor,
         Consumable,
-        Treasure
-        Consumable,
+        Treasure,
         Hammer,
         Arrows,
         Haerówka

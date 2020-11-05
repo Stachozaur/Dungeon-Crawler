@@ -114,10 +114,8 @@ namespace Codecool.DungeonCrawl.Logic.Actors
                 }
                 else
                 {
-                    UI.DisplayCombatOptions(_options);
                     var enemy = targetCell.Actor;
                     var CombatMode = new CombatMode(this, enemy);
-                    CombatMode.RunCombat();
                     
                 }
             }
