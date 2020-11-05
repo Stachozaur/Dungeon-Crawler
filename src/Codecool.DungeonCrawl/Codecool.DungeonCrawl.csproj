@@ -20,5 +20,11 @@
     <ItemGroup>
       <PackageReference Include="Matyasf.Perlin" Version="1.2.0" />
     </ItemGroup>
+    
+    <ItemGroup>
+      <Compile Update="Items\Item.cs">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </Compile>
+    </ItemGroup>
 
 </Project>

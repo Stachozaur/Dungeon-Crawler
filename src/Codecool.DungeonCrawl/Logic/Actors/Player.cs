@@ -114,7 +114,6 @@ namespace Codecool.DungeonCrawl.Logic.Actors
                 }
                 else if (targetCell.Actor is Door)
                 {
-                    System.Console.WriteLine("kurwa");
                     var colorDoor = targetCell.Actor as Door;
                     if (colorDoor.IsKeyMatch(this, colorDoor.GetDoorType()))
                     {
@@ -155,7 +154,9 @@ namespace Codecool.DungeonCrawl.Logic.Actors
 
         public void RemoveItemFromInventory(Item item)
         {
-            //_inventory.RemoveItemFromInventory(item);
+            //System.Console.WriteLine(($"kurwa to jest to {item.type}"));
+
+            _inventory.RemoveItemFromInventory(item);
         }
 
         private void PickUpItem(Cell targetCell)

@@ -117,7 +117,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public void Update(float deltaTime)
         {
             _timeLastMove += deltaTime;
-            if(_timeLastMove >= 0.03f)
+            if(_timeLastMove >= 0.3f)
             {
                 if (!AggressiveRunCheck(Player.Singleton))
                 {
