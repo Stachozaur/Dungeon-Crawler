@@ -7,6 +7,7 @@ using SharpDX;
 using System.Collections.Generic;
 using System.Transactions;
 using Veldrid;
+using Codecool.DungeonCrawl.Logic.Doors;
 
 namespace Codecool.DungeonCrawl.Logic.Actors
 {
@@ -35,6 +36,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
                 { new Consumable("Healing Potion", 10, true, 50), 1 },
                 { new Armor("Wooden Armor", 10, 0, 10), 1 },
                 { new Consumable("Mana Potion", 10, true, 50), 1 },
+                { new DoorKey( DoorKeyType.Blue ), 1 }
             };
             var newItems = new Dictionary<Item, int>
             {
@@ -71,7 +73,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             return _options;
         }
 
-       
+
         public void Update(float deltaTime)
         {
             if (KeyboardInput.IsKeyPressedThisFrame(Key.Up))
@@ -112,6 +114,20 @@ namespace Codecool.DungeonCrawl.Logic.Actors
                     UI.UpdateInventory(GetInventory());
                     AssignCell(targetCell);
                 }
+                else if (targetCell.Actor is Door)
+                {
+                    var colorDoor = targetCell.Actor as Door;
+                    if (colorDoor.IsKeyMatch(this, colorDoor.GetDoorType()))
+                    {
+                        //targetCell.Actor.Cell = null;
+                        targetCell.Actor.Destroy();
+                        targetCell.Actor = null;
+                        targetCell.Type = TileType.Floor;
+                        AssignCell(targetCell);
+
+                    }
+                }
+
                 else
                 {
                     var enemy = targetCell.Actor;
@@ -119,6 +135,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
                     
                 }
             }
+
         }
 
         public override bool OnCollision(Actor other)
@@ -130,7 +147,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         {
             _inventory.AddLootToInventory(lootedItems);
         }
-        
+
         public void UpdateInventory()
         {
             
@@ -140,6 +157,8 @@ namespace Codecool.DungeonCrawl.Logic.Actors
 
         public void RemoveItemFromInventory(Item item)
         {
+            //System.Console.WriteLine(($"kurwa to jest to {item.type}"));
+
             _inventory.RemoveItemFromInventory(item);
         }
 

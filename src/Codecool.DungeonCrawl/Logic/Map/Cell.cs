@@ -1,4 +1,5 @@
 using Codecool.DungeonCrawl.Logic.Actors;
+using Codecool.DungeonCrawl.Logic.Doors;
 using Perlin.Display;
 using System.Collections.Generic;
 using System.Numerics;

@@ -36,6 +36,9 @@ namespace Codecool.DungeonCrawl.Logic
             TileType.Empty => true,
             TileType.Floor => true,
             TileType.Wall => false,
+            TileType.DoorBlue => false,
+            TileType.DoorRed => false,
+            TileType.DoorYellow => false,
             _ => true
         };
 

@@ -24,6 +24,10 @@
         Key,
         Armor,
         Consumable,
+        DoorBlue,
+        DoorRed,
+        DoorYellow
+        Consumable,
         Treasure,
         Hammer,
         Arrows,

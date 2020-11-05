@@ -30,6 +30,12 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             cell.Sprite.Parent.AddChild(Sprite);
         }
 
+        protected Actor(Cell cell, TileType tile)
+        {
+            Cell = cell;
+            Tile = tile;
+        }
+
         /// <summary>
         ///     Invoked whenever another Actor attempts to walk onto this Actor's cell
         /// </summary>
@@ -69,6 +75,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         private (int x, int y) _position;
 
         public Sprite Sprite { get; set; }
+        public TileType Tile { get; }
 
         /// <summary>
         ///     Assign this Actor to given cell
