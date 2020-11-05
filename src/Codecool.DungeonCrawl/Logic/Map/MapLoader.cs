@@ -82,6 +82,7 @@ namespace Codecool.DungeonCrawl.Logic.Map
             '.' => TileType.Floor,
             's' => TileType.Floor,
             'p' => TileType.Floor,
+            'h' => TileType.Floor,
             '-' => TileType.UIborderHorizontalTop,
             '_' => TileType.UIborderHorizontalBottom,
             '!' => TileType.UIborderVerticalLeft,
@@ -104,6 +105,7 @@ namespace Codecool.DungeonCrawl.Logic.Map
         {
             's' => new Skeleton(cell),
             'p' => new Player(cell),
+            'h' => new Haerówka(cell),
             _ => null
         };
     }

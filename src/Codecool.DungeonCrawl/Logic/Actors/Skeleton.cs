@@ -26,8 +26,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public int _actionPoints { get; private set; } = 50;
         public int _magicResistance { get; private set; } = 0;
         public int _armor { get; private set; } = 5;
-        public bool isAggresive { get; private set; }
-
+        private bool _isAggressive;
         private float _timeLastMove;
 
         public Skeleton(Cell cell) : base(cell, TileSet.GetTile(TileType.Skeleton))
@@ -41,7 +40,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             };
             var lootTable = new LootTable(lootableItems);
             _inventory = new Inventory(lootTable.RandomizeLoot());
-            bool isAgressive = true;
+            _isAggressive = IsAggressive();
 
         }
 
@@ -96,7 +95,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             var canPass = targetCell?.OnCollision(this) ?? false;
             var isActor = targetCell?.IsActor(this) ?? false;
 
-            if (canPass && !isActor && !isAggresive)
+            if (canPass && !isActor)
             {
                 AssignCell(targetCell);
             }
@@ -117,17 +116,17 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public void Update(float deltaTime)
         {
             _timeLastMove += deltaTime;
-            if(_timeLastMove >= 0.03f)
+            if(_timeLastMove >= 1.3f)
             {
-                if (!AggressiveRunCheck(Player.Singleton))
+                if (_isAggressive && AggressiveRunCheck(Player.Singleton))
                 {
                     _timeLastMove = 0;
-                    RandomAiMove();
+                    ChargePlayer(Player.Singleton);
                 }
                 else
                 {
                     _timeLastMove = 0;
-                    ChargePlayer(Player.Singleton);
+                    RandomAiMove();
                 }
             }
         }

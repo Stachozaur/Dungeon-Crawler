@@ -29,6 +29,7 @@ namespace Codecool.DungeonCrawl
                 [TileType.Floor] = CreateTile(2, 0),
                 [TileType.Player] = CreateTile(27, 0),
                 [TileType.Skeleton] = CreateTile(29, 6),
+                [TileType.Haerówka] = CreateTile(31, 10),
                 [TileType.UIborderHorizontalTop] = CreateTile(17, 19),
                 [TileType.UIborderVerticalLeft] = CreateTile(16, 20),
                 [TileType.UIborderHorizontalBottom] = CreateTile(17,21),

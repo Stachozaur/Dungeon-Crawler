@@ -19,6 +19,7 @@
         HealingPotion,
         WoodenShield,
         ManaPotion,
-        IronChestplate
+        IronChestplate,
+        Haerówka
     }
 }

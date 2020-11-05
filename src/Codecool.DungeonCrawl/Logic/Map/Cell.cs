@@ -80,6 +80,5 @@ namespace Codecool.DungeonCrawl.Logic.Map
             return GetNeighbour(x, y);
         }
 
-
     }
 }
