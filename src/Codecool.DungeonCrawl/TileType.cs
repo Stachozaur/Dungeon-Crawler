@@ -23,6 +23,7 @@
         Sword,
         Key,
         Armor,
-        Consumable
+        Consumable,
+        Treasure
     }
 }

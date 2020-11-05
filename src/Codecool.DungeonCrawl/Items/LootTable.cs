@@ -20,7 +20,7 @@ namespace Codecool.DungeonCrawl.Items
                 var roll = random.Next(0, 100);
                 if (roll <= item.Key.GetDroprate())
                 {
-                    randomizedLoot.Add(item.Key, 1);
+                    randomizedLoot.Add(item.Key, item.Value);
                 }
             }
             return randomizedLoot;
