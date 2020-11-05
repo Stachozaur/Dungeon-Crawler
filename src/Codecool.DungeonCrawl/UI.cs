@@ -64,7 +64,6 @@ namespace Codecool.DungeonCrawl
                         var cell = map.GetCell(slot.x, slot.y);
                         if (cell.Type == TileType.EmptyInventorySlot && !inventoryReference.ContainsKey(item.Key))
                         {
-                            
                             var ItemNamelastWord = Utilities.GetLastWord(item.Key.GetItemName());
                             if (GetInventoryTile(ItemNamelastWord) != TileType.Empty)
                             {
@@ -73,12 +72,11 @@ namespace Codecool.DungeonCrawl
                                 DisplayItemQuantity(item.Value, (slot.x, slot.y));
                                 break;
                             }
+
                             cell.Actor = new UIInventoryActor(cell, GetInventoryTile(item.Key.GetItemName()));
                             inventoryReference.Add(item.Key, item.Value);
                             DisplayItemQuantity(item.Value, (slot.x, slot.y));
                             break;
-                            
-
                         }
                     }
                 }
@@ -114,7 +112,7 @@ namespace Codecool.DungeonCrawl
             var cell = map.GetCell(position.x, position.y);
             cell.Actor = new UIInventoryActor(cell, tile);
         }
-        
+
         public static void DisplayTextOnSpot((int x, int y) position, string text, int fontSize)
         {
             TextField TextToDisplay = new TextField(PerlinApp.FontRobotoMono.CreateFont(fontSize));
@@ -123,6 +121,18 @@ namespace Codecool.DungeonCrawl
             TextToDisplay.X = position.x;
             TextToDisplay.Y = position.y;
             PerlinApp.Stage.AddChild(TextToDisplay);
+        }
+
+        public static TextField DisplayEnemyText(Enemy enemy)
+        {
+            TextField textField = new TextField(PerlinApp.FontRobotoMono.CreateFont(12));
+            textField.BackgroundColor = Color.FloralWhite;
+            textField.Text = enemy.speak();
+            textField.FontColor = Color.Black;
+            textField.X = enemy.Position.x + 20;
+            textField.Y = enemy.Position.y + 20;
+            PerlinApp.Stage.AddChild(textField);
+            return textField;
         }
     }
 }
