@@ -27,14 +27,6 @@ namespace Codecool.DungeonCrawl
             (31, 4),
             (32, 4),
         };
-        
-        private static List<(int x, int y)> CombatTextSlots = new List<(int, int)>
-        {
-            (27, 13),
-            (28, 15),
-            (28, 14),
-            (30, 14),
-        };
 
         private static Dictionary<string, int> fontSize = new Dictionary<string, int>()
         {
@@ -116,22 +108,6 @@ namespace Codecool.DungeonCrawl
             _ => TileType.Empty
         };
 
-        // public static void DisplayCombatOptions(List<Option> options)
-        // {
-        //     var optionsReference = new List<Option>();
-        //     foreach (var slot in CombatTextSlots)
-        //     {
-        //         foreach (var option in options)
-        //         {
-        //             if (optionsReference.ContainsKey(item.Key))
-        //             DisplayTextOnSpot((slot.x * TileSet.Size * TileSet.Scale + 20, slot.y * TileSet.Size * TileSet.Scale + 20), option.GetAbilityName(), fontSize["normal"]);
-        //             optionsReference.Add(option);
-        //             break;
-        //         }
-        //     }
-        //
-        // }
-
         private static void DisplayTileOnSpot((int x, int y) position, TileType tile)
         {
             var map = Program.Map;
@@ -148,17 +124,5 @@ namespace Codecool.DungeonCrawl
             TextToDisplay.Y = position.y;
             PerlinApp.Stage.AddChild(TextToDisplay);
         }
-        
-        public static void DisplayEnemyText(Enemy enemy)
-        {
-            TextField textField = new TextField(PerlinApp.FontRobotoMono.CreateFont(12));
-            textField.BackgroundColor = Color.FloralWhite;
-            textField.Text = enemy.speak();
-            textField.FontColor = Color.FloralWhite;
-            textField.X =  enemy.Position.x + 20;
-            textField.Y = enemy.Position.y + 20;
-            PerlinApp.Stage.AddChild(textField);
-        }
-        
     }
 }
