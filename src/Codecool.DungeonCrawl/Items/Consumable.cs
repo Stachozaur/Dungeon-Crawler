@@ -11,6 +11,14 @@
             _isRestoringHP = isRestoringHP;
             _droprate = droprate;
             _value = potionPower / 10;
+            if (isRestoringHP)
+            {
+                type = TileType.HealingPotion;
+            }
+            else
+            {
+                type = TileType.ManaPotion;
+            }
         }
     }
 }

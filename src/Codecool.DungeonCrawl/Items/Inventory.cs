@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Codecool.DungeonCrawl.Logic.Actors;
+using System.Collections.Generic;
 
 namespace Codecool.DungeonCrawl.Items
 {
@@ -37,6 +38,11 @@ namespace Codecool.DungeonCrawl.Items
                     _inventory.Add(item.Key, item.Value);
                 }
             }
+        }
+
+        public void AddSingleItemToInventory(Item item)
+        {
+            _inventory.Add(item, 1);
         }
     }
 }

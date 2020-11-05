@@ -13,6 +13,7 @@
             _isMagic = isMagic;
             _droprate = droprate;
             _value = _attack * 10;
+            type = TileType.Sword;
         }
     }
 }

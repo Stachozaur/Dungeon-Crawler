@@ -1,4 +1,7 @@
-﻿namespace Codecool.DungeonCrawl
+﻿using Codecool.DungeonCrawl.Logic.Actors;
+using System.Net.NetworkInformation;
+
+namespace Codecool.DungeonCrawl
 {
     public abstract class Item
     {
@@ -7,6 +10,8 @@
         protected int _value { get; set; }
 
         protected int _droprate { get; set; }
+
+        public TileType type;
 
         public int GetDroprate()
         {

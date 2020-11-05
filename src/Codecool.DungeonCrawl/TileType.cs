@@ -20,6 +20,13 @@
         WoodenShield,
         ManaPotion,
         IronChestplate,
+        Sword,
+        Key,
+        Armor,
+        Consumable,
+        Hammer,
+        Arrows
+        IronChestplate,
         Haerówka
     }
 }

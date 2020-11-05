@@ -3,6 +3,7 @@ using Codecool.DungeonCrawl.Items;
 using Codecool.DungeonCrawl.Logic.Interfaces;
 using Codecool.DungeonCrawl.Logic.Map;
 using Perlin;
+using SharpDX;
 using System.Collections.Generic;
 using Veldrid;
 
@@ -38,7 +39,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             {
                 { new Weapon("B.F.H", 10, false, 5), 2 },
                 { new Consumable("Healing Potion", 10, true, 50), 1 },
-                { new Armor("Wooden Armor", 10, 0, 10), 1 },
+                { new Armor("Wooden Shield", 10, 0, 10), 1 },
                 { new Consumable("Mana Potion", 10, true, 50), 1 },
                 { new Armor("Iron Chestplate", 20, 0, 10), 1 }
             };
@@ -102,12 +103,23 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             if (canPass && !isActor)
                 AssignCell(targetCell);
 
-            //else if (canPass && isActor)
-            //{
-            //    var enemy = targetCell.Actor;
-            //    var CombatMode = new CombatMode(this, enemy);
-            //    CombatMode.RunCombat();
-            //}
+            else if (canPass && isActor)
+            {
+                if (targetCell.Actor is ItemActor)
+                {
+                    PickUpItem(targetCell);
+                    UI.UpdateInventory(GetInventory());
+                    AssignCell(targetCell);
+                }
+                else
+                {
+                    UI.DisplayCombatOptions(_options);
+                    var enemy = targetCell.Actor;
+                    var CombatMode = new CombatMode(this, enemy);
+                    CombatMode.RunCombat();
+                    
+                }
+            }
         }
 
         public override bool OnCollision(Actor other)
@@ -122,13 +134,20 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         
         public void UpdateInventory()
         {
+            
             var inventory = GetInventory();
             //UI.UpdateInventory(inventory);
         }
 
-        private Dictionary<Item, int> GetInventory()
+        private void PickUpItem(Cell targetCell)
         {
-            return _inventory.GetInventory();
+            _inventory.AddLootToInventory(targetCell.Actor.GetInventory());
+            targetCell.Actor.Destroy();
+            targetCell.Actor = null;
+            foreach (var item in _inventory.GetInventory())
+            {
+                System.Console.WriteLine($"{item.Key.GetItemName()}: {item.Value}");
+            }
         }
     }
 }

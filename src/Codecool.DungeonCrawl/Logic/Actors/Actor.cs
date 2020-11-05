@@ -18,6 +18,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         // default ctor
         protected Actor(Cell cell, Rectangle tile)
         {
+            
             Cell = cell;
             Cell.Actor = this;
 
@@ -80,10 +81,6 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             target.Actor = this;
 
             Position = target.Position;
-        }
-
-        public void ReceiveDMG(int damage, bool isMagic)
-        {
         }
 
         public Dictionary<Item, int> GetInventory()
