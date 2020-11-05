@@ -26,8 +26,7 @@
         Consumable,
         DoorBlue,
         DoorRed,
-        DoorYellow
-        Consumable,
+        DoorYellow,
         Treasure,
         Hammer,
         Arrows,

@@ -48,10 +48,10 @@ namespace Codecool.DungeonCrawl
                 [TileType.WoodenShield] = CreateTile(8,24),
                 [TileType.ManaPotion] = CreateTile(16,25),
                 [TileType.IronChestplate] = CreateTile(0,23),
-                [TileType.Sword] = CreateTile(0, 29),
                 [TileType.DoorBlue] = CreateTile(0, 10),
                 [TileType.DoorRed] = CreateTile(0, 20),
                 [TileType.DoorYellow] = CreateTile(23, 10),
+                [TileType.Treasure] = CreateTile(23, 11)
             };
         }
 
