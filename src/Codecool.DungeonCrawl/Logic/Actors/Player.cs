@@ -95,6 +95,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             {
                 TryMove(Direction.Right);
             }
+            UI.UpdateInventory(GetInventory());
         }
 
         private void TryMove(Direction dir)
@@ -111,7 +112,6 @@ namespace Codecool.DungeonCrawl.Logic.Actors
                 if (targetCell.Actor is ItemActor || targetCell.Actor is Treasure)
                 {
                     PickUpItem(targetCell);
-                    UI.UpdateInventory(GetInventory());
                     AssignCell(targetCell);
                 }
                 else if (targetCell.Actor is Door)
@@ -152,7 +152,6 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         {
             
             var inventory = GetInventory();
-            //UI.UpdateInventory(inventory);
         }
 
         public void RemoveItemFromInventory(Item item)

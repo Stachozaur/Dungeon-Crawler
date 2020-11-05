@@ -126,7 +126,7 @@ namespace Codecool.DungeonCrawl.Logic.Map
             'm' => new ItemActor(cell, new Consumable("Mana Potion", 20, false, 100)),
             'h' => new ItemActor(cell, new Consumable("Healing Potion", 20, true, 100)),
             't' => new Treasure(cell),
-            'H' => new Haerówka(cell),
+            'H' => new HaerÃ³wka(cell),
             _ => null
         };
     }
