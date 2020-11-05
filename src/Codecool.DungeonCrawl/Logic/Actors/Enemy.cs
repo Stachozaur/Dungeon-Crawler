@@ -14,6 +14,9 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public abstract bool isAggressive { get; set; }
 
         public abstract float timeLastMove { get; set; }
+        public abstract float timeLastSpeak { get; set; }
+
+        public abstract List<string> speakList { get; set; }
 
         public Enemy(Cell cell, Rectangle tile) : base(cell, tile)
         {
@@ -23,6 +26,11 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             _inventory = new Inventory(lootTable.RandomizeLoot());
         }
 
+        public string Speak()
+        {
+            int index = Program.Rnd.Next(speakList.Count);
+            return speakList[index];
+        }
         public bool IsAggressive()
         {
             return Program.Rnd.Next(100) % 2 == 0;
@@ -93,6 +101,16 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         }
 
         public void Update(float deltaTime)
+        {
+            EnemyMove(deltaTime);
+            timeLastSpeak += deltaTime;
+            if (timeLastSpeak >= 7f)
+            {
+                UI.Speak();
+            }
+        }
+
+        private void EnemyMove(float deltaTime)
         {
             timeLastMove += deltaTime;
             if (timeLastMove >= 1.3f)

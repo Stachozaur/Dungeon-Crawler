@@ -18,6 +18,9 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public int _armor { get; private set; } = 5;
         public override bool isAggressive { get; set; }
         public override float timeLastMove { get; set; }
+        public override List<string> speakList { get; set; }
+        public override float timeLastSpeak { get; set; }
+
         public Haerówka(Cell cell) : base(cell, TileSet.GetTile(TileType.Haerówka))
         {
             Program.UpdatablesToAdd.Add(this);
@@ -28,6 +31,9 @@ namespace Codecool.DungeonCrawl.Logic.Actors
                 { new Consumable("Mana Potion", 10, true, 50), 1 },
             };
             var lootTable = new LootTable(lootableItems);
+
+            speakList = new List<string> { "OH!, YES!!!, AHHH!!, SOFTSKILLS YEAH, SOFTSKILLS AAARGHH", "Every fall is chance to rise!", "Yes! Doing your job is part of your JOB!", "Hmm, I can smell your softskills" };
+
             _inventory = new Inventory(lootTable.RandomizeLoot());
             isAggressive = IsAggressive();
 
