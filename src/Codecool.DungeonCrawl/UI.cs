@@ -1,19 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Runtime.Intrinsics.X86;
-using System.Threading.Tasks;
-using Codecool.DungeonCrawl.Items;
 using Codecool.DungeonCrawl.Logic.Actors;
 using Perlin;
 using Perlin.Display;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
-using Codecool.DungeonCrawl.Logic.Map;
-using Perlin.Geom;
-using Codecool.DungeonCrawl.Combat;
-using SharpDX;
 using Utilities = Codecool.DungeonCrawl.Logic.Utilities;
 
 namespace Codecool.DungeonCrawl
@@ -156,6 +147,17 @@ namespace Codecool.DungeonCrawl
             TextToDisplay.X = position.x;
             TextToDisplay.Y = position.y;
             PerlinApp.Stage.AddChild(TextToDisplay);
+        }
+        
+        public static void DisplayEnemyText(Enemy enemy)
+        {
+            TextField textField = new TextField(PerlinApp.FontRobotoMono.CreateFont(12));
+            textField.BackgroundColor = Color.FloralWhite;
+            textField.Text = enemy.speak();
+            textField.FontColor = Color.FloralWhite;
+            textField.X =  enemy.Position.x + 20;
+            textField.Y = enemy.Position.y + 20;
+            PerlinApp.Stage.AddChild(textField);
         }
         
     }

@@ -39,7 +39,7 @@ namespace Codecool.DungeonCrawl
                 [TileType.Armor] = CreateTile(0, 23),
                 [TileType.Hammer] = CreateTile(5, 29),
 
-                [TileType.Haerówka] = CreateTile(31, 10),
+                [TileType.HaerÃ³wka] = CreateTile(31, 10),
                 [TileType.UIborderHorizontalTop] = CreateTile(17, 19),
                 [TileType.UIborderVerticalLeft] = CreateTile(16, 20),
                 [TileType.UIborderHorizontalBottom] = CreateTile(17,21),

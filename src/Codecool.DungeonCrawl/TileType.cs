@@ -25,8 +25,7 @@
         Armor,
         Consumable,
         Hammer,
-        Arrows
-        IronChestplate,
+        Arrows,
         Haerówka
     }
 }
