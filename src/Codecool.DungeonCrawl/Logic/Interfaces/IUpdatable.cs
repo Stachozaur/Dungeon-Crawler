@@ -1,4 +1,6 @@
-﻿namespace Codecool.DungeonCrawl.Logic.Interfaces
+﻿using Perlin.Display;
+
+namespace Codecool.DungeonCrawl.Logic.Interfaces
 {
     public interface IUpdatable
     {

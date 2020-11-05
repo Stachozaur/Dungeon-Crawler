@@ -8,7 +8,7 @@ using Veldrid;
 
 namespace Codecool.DungeonCrawl.Logic.Actors
 {
-    public class Haerówka : Enemy, IUpdatable
+    public class Haerówka : Enemy, IUpdatable, IPlayerAttributes
     {
         public int _hp { get; private set; } = 20;
         public int _attack { get; private set; } = 5;
@@ -20,6 +20,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public override float timeLastMove { get; set; }
         public override List<string> speakList { get; set; }
         public override float timeLastSpeak { get; set; }
+        public override float timeToRemoveSpeak { get; set; }
 
         public Haerówka(Cell cell) : base(cell, TileSet.GetTile(TileType.Haerówka))
         {

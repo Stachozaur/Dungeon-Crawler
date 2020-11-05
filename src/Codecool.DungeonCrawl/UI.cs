@@ -142,6 +142,30 @@ namespace Codecool.DungeonCrawl
             var cell = map.GetCell(position.x, position.y);
             cell.Actor = new UIInventoryActor(cell, tile);
         }
-        
+
+
+        public static TextField CreateEnemyText(Enemy enemy)
+        {
+            TextField textField = new TextField(PerlinApp.FontRobotoMono.CreateFont(12));
+            textField.BackgroundColor = Color.FloralWhite;
+            textField.Text = enemy.Speak();
+            textField.FontColor = Color.Black;
+            textField.X = (enemy.Position.x * TileSet.Size) * TileSet.Scale + 20;
+            textField.Y = (enemy.Position.y * TileSet.Size) * TileSet.Scale + 20;
+            return textField;
+        }
+
+        public static void DisplayEnemyText(TextField textField)
+        {
+            PerlinApp.Stage.AddChild(textField);
+        }
+       
+
+        public static void RemoveEnemyText(TextField textField)
+        {
+            PerlinApp.Stage.RemoveChild(textField);
+        }
     }
+
+
 }

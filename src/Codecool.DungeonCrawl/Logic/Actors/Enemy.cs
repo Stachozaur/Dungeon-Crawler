@@ -3,6 +3,7 @@ using Codecool.DungeonCrawl.Items;
 using Codecool.DungeonCrawl.Logic;
 using Codecool.DungeonCrawl.Logic.Interfaces;
 using Codecool.DungeonCrawl.Logic.Map;
+using Perlin.Display;
 using Perlin.Geom;
 using System;
 using System.Collections.Generic;
@@ -15,8 +16,10 @@ namespace Codecool.DungeonCrawl.Logic.Actors
 
         public abstract float timeLastMove { get; set; }
         public abstract float timeLastSpeak { get; set; }
+        public abstract float timeToRemoveSpeak { get; set; }
 
         public abstract List<string> speakList { get; set; }
+        public TextField textField { get; set; }
 
         public Enemy(Cell cell, Rectangle tile) : base(cell, tile)
         {
@@ -24,7 +27,10 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             var lootableItems = new Dictionary<Item, int> { };
             var lootTable = new LootTable(lootableItems);
             _inventory = new Inventory(lootTable.RandomizeLoot());
+
+
         }
+
 
         public string Speak()
         {
@@ -102,19 +108,38 @@ namespace Codecool.DungeonCrawl.Logic.Actors
 
         public void Update(float deltaTime)
         {
-            EnemyMove(deltaTime);
+            var textField = UI.CreateEnemyText(this);
+
+            EnemyMove(deltaTime, textField);
+            EnemySpeak(deltaTime, textField);
+        }
+
+
+        private void EnemySpeak(float deltaTime, TextField textField)
+        {
+            ;
             timeLastSpeak += deltaTime;
-            if (timeLastSpeak >= 7f)
+            timeToRemoveSpeak += deltaTime;
+            if (timeLastSpeak >= 3f)
             {
-                UI.Speak();
+                UI.DisplayEnemyText(textField);
+                timeLastSpeak = 0;
+                timeToRemoveSpeak = 0;
+
+            if (timeToRemoveSpeak >= 2f)
+            {
+                UI.RemoveEnemyText(textField);
+            }
+
             }
         }
 
-        private void EnemyMove(float deltaTime)
+        private void EnemyMove(float deltaTime, TextField textField)
         {
             timeLastMove += deltaTime;
             if (timeLastMove >= 1.3f)
             {
+                UI.RemoveEnemyText(textField);
                 if (isAggressive && AggressiveRunCheck(Player.Singleton))
                 {
                     timeLastMove = 0;

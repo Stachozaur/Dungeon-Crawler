@@ -17,8 +17,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
     /// 
 
 
-    public class Skeleton : Actor, IPlayerAttributes, IUpdatable
-
+    public class Skeleton : Enemy, IPlayerAttributes, IUpdatable
     {
         public int _hp { get; private set; } = 20;
         public int _attack { get; private set; } = 5;
@@ -26,8 +25,11 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public int _actionPoints { get; private set; } = 50;
         public int _magicResistance { get; private set; } = 0;
         public int _armor { get; private set; } = 5;
-        private bool _isAggressive;
-        private float _timeLastMove;
+        public override bool isAggressive { get; set; }
+        public override float timeLastMove { get; set; }
+        public override List<string> speakList { get; set; }
+        public override float timeLastSpeak { get; set; }
+        public override float timeToRemoveSpeak { get; set; }
 
         public Skeleton(Cell cell) : base(cell, TileSet.GetTile(TileType.Skeleton))
         {
@@ -39,101 +41,12 @@ namespace Codecool.DungeonCrawl.Logic.Actors
                 { new Consumable("Mana Potion", 10, true, 50), 1 },
             };
             var lootTable = new LootTable(lootableItems);
+
+            speakList = new List<string> { "Praca, Praca" };
+
             _inventory = new Inventory(lootTable.RandomizeLoot());
-            _isAggressive = IsAggressive();
+            isAggressive = IsAggressive();
 
-        }
-
-        private bool IsAggressive()
-        {
-            return Program.Rnd.Next(100) % 2 == 0;
-        }
-
-        private bool AggressiveRunCheck(Player player)
-        {
-            int CriticalDistance = 5;
-            var playerPosition = player.Position;
-            var skeletonPosition = this.Position;
-            (int x, int y) distance = GetVector(playerPosition, skeletonPosition);
-            distance = (Math.Abs(distance.x), Math.Abs(distance.y));
-            return distance.x <= CriticalDistance && distance.y == 0 || distance.y <= CriticalDistance && distance.x == 0;
-        }
-
-        private Direction ChargePlayerDirection(Player player)
-        {
-            (int x, int y) vector = GetVector(player.Position, this.Position);
-
-            (int x, int y) normalize = (Math.Sign(vector.x), Math.Sign(vector.y));
-
-            Direction targetDirection = normalize.ToDirection();
-            return targetDirection;
-        }
-
-        private void ChargePlayer(Player player)
-        {
-            Direction dir = ChargePlayerDirection(player);
-            TryMove(dir);
-        }
-
-
-        public Direction GetRandomDirection()
-        {
-            int maxDirection = 8;
-            var direction = (Direction)Program.Rnd.Next(0, maxDirection);
-            return direction;
-        }
-
-        public void RandomAiMove()
-        {
-            var direction = GetRandomDirection();
-            TryMove(direction);
-        }
-
-        private void TryMove(Direction dir)
-        {
-            var targetCell = Cell.GetNeighbour(dir);
-            var canPass = targetCell?.OnCollision(this) ?? false;
-            var isActor = targetCell?.IsActor(this) ?? false;
-
-            if (canPass && !isActor)
-            {
-                AssignCell(targetCell);
-            }
-        }
-
-
-        public (int x, int y) GetVector((int x, int y) position, (int x, int y)otherPosition)
-        {                       
-            (int x, int y) distance = ((position.x - otherPosition.x), (position.y - otherPosition.y));
-            return distance;
-        }
-
-        public bool IsPlayerClose()
-        {
-            return false;
-        }
-
-        public void Update(float deltaTime)
-        {
-            _timeLastMove += deltaTime;
-            EnemyMove();
-        }
-
-        private void EnemyMove()
-        {
-            if (_timeLastMove >= 1.3f)
-            {
-                if (_isAggressive && AggressiveRunCheck(Player.Singleton))
-                {
-                    _timeLastMove = 0;
-                    ChargePlayer(Player.Singleton);
-                }
-                else
-                {
-                    _timeLastMove = 0;
-                    RandomAiMove();
-                }
-            }
         }
     }
 }
