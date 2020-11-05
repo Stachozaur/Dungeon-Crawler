@@ -39,30 +39,29 @@ namespace Codecool.DungeonCrawl
         
         private static List<(int x, int y)> CombatTextSlots = new List<(int, int)>
         {
-            (27, 3),
-            (28, 3),
-            (29, 3),
-            (30, 3),
-            (31, 3),
-            (32, 3),
-            (27, 4),
-            (28, 4),
-            (29, 4),
-            (30, 4),
-            (31, 4),
-            (32, 4),
+            (27, 13),
+            (28, 15),
+            (28, 14),
+            (30, 14),
+        };
+
+        private static Dictionary<string, int> fontSize = new Dictionary<string, int>()
+        {
+            {"small", 8},
+            {"header", 22},
+            {"normal", 18}
         };
 
         public static void DisplayUIHeaders()
         {
-            TextField InventoryHeader = new TextField(PerlinApp.FontRobotoMono.CreateFont(22));
+            TextField InventoryHeader = new TextField(PerlinApp.FontRobotoMono.CreateFont(fontSize["header"]));
             InventoryHeader.Text = "INVENTORY";
             InventoryHeader.FontColor = Color.FloralWhite;
             InventoryHeader.X = 900;
             InventoryHeader.Y = 50;
             PerlinApp.Stage.AddChild(InventoryHeader);
 
-            TextField CombatHeader = new TextField(PerlinApp.FontRobotoMono.CreateFont(22));
+            TextField CombatHeader = new TextField(PerlinApp.FontRobotoMono.CreateFont(fontSize["header"]));
             CombatHeader.Text = "COMBAT";
             CombatHeader.FontColor = Color.FloralWhite;
             CombatHeader.X = 920;
@@ -105,7 +104,7 @@ namespace Codecool.DungeonCrawl
 
         private static void DisplayItemQuantity(int number, (int x, int y) position)
         {
-            var textField = new TextField(PerlinApp.FontRobotoMono.CreateFont(8));
+            var textField = new TextField(PerlinApp.FontRobotoMono.CreateFont(fontSize["small"]));
             textField.Text = String.Format(" {0} ", number.ToString());
             textField.BackgroundColor = Color.FloralWhite;
             textField.FontColor = Color.Black;
@@ -126,21 +125,37 @@ namespace Codecool.DungeonCrawl
             _ => TileType.Empty
         };
 
-        public static void DisplayCombatOptions(List<Option> options)
-        {
-            DisplayTileOnSpot((30,14), TileType.Arrows);
-            // foreach (var option in options)
-            // {
-            //     
-            // }
+        // public static void DisplayCombatOptions(List<Option> options)
+        // {
+        //     var optionsReference = new List<Option>();
+        //     foreach (var slot in CombatTextSlots)
+        //     {
+        //         foreach (var option in options)
+        //         {
+        //             if (optionsReference.ContainsKey(item.Key))
+        //             DisplayTextOnSpot((slot.x * TileSet.Size * TileSet.Scale + 20, slot.y * TileSet.Size * TileSet.Scale + 20), option.GetAbilityName(), fontSize["normal"]);
+        //             optionsReference.Add(option);
+        //             break;
+        //         }
+        //     }
+        //
+        // }
 
-        }
-
-        public static void DisplayTileOnSpot((int x, int y) position, TileType tile)
+        private static void DisplayTileOnSpot((int x, int y) position, TileType tile)
         {
             var map = Program.Map;
             var cell = map.GetCell(position.x, position.y);
             cell.Actor = new UIInventoryActor(cell, tile);
+        }
+        
+        public static void DisplayTextOnSpot((int x, int y) position, string text, int fontSize)
+        {
+            TextField TextToDisplay = new TextField(PerlinApp.FontRobotoMono.CreateFont(fontSize));
+            TextToDisplay.Text = text;
+            TextToDisplay.FontColor = Color.FloralWhite;
+            TextToDisplay.X = position.x;
+            TextToDisplay.Y = position.y;
+            PerlinApp.Stage.AddChild(TextToDisplay);
         }
         
     }

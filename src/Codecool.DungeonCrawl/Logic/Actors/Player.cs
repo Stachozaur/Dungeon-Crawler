@@ -90,6 +90,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             {
                 TryMove(Direction.Right);
             }
+            UI.UpdateInventory(GetInventory());
         }
 
         private void TryMove(Direction dir)
@@ -106,12 +107,10 @@ namespace Codecool.DungeonCrawl.Logic.Actors
                 if (targetCell.Actor is ItemActor)
                 {
                     PickUpItem(targetCell);
-                    UI.UpdateInventory(GetInventory());
                     AssignCell(targetCell);
                 }
                 else
                 {
-                    UI.DisplayCombatOptions(_options);
                     var enemy = targetCell.Actor;
                     var CombatMode = new CombatMode(this, enemy);
                     CombatMode.RunCombat();
@@ -134,7 +133,6 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         {
             
             var inventory = GetInventory();
-            //UI.UpdateInventory(inventory);
         }
 
         private void PickUpItem(Cell targetCell)
