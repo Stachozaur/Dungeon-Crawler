@@ -44,5 +44,10 @@ namespace Codecool.DungeonCrawl.Items
         {
             _inventory.Add(item, 1);
         }
+
+        public void RemoveItemFromInventory(Item item)
+        {
+            _inventory.Remove(item);
+        }
     }
 }

@@ -48,7 +48,13 @@ namespace Codecool.DungeonCrawl
                 [TileType.UIborderCornerBottomRaight] = CreateTile(18, 21),
                 [TileType.UIborderCornerTopLeft] = CreateTile(16, 19),
                 [TileType.UIborderCornerTopRight] = CreateTile(18, 19),
-                [TileType.Arrows] = CreateTile(19, 21)
+                [TileType.EmptyInventorySlot] = CreateTile(23,26),
+                [TileType.HealingPotion] = CreateTile(17,24),
+                [TileType.WoodenShield] = CreateTile(8,24),
+                [TileType.ManaPotion] = CreateTile(16,25),
+                [TileType.IronChestplate] = CreateTile(0,23),
+                [TileType.Sword] = CreateTile(0, 29),
+                [TileType.Treasure] = CreateTile(23, 11)
             };
         }
 

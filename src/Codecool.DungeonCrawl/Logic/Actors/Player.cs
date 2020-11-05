@@ -5,6 +5,7 @@ using Codecool.DungeonCrawl.Logic.Map;
 using Perlin;
 using SharpDX;
 using System.Collections.Generic;
+using System.Transactions;
 using Veldrid;
 
 namespace Codecool.DungeonCrawl.Logic.Actors
@@ -105,7 +106,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
 
             else if (canPass && isActor)
             {
-                if (targetCell.Actor is ItemActor)
+                if (targetCell.Actor is ItemActor || targetCell.Actor is Treasure)
                 {
                     PickUpItem(targetCell);
                     UI.UpdateInventory(GetInventory());
@@ -139,9 +140,14 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             //UI.UpdateInventory(inventory);
         }
 
+        public void RemoveItemFromInventory(Item item)
+        {
+            _inventory.RemoveItemFromInventory(item);
+        }
+
         private void PickUpItem(Cell targetCell)
         {
-            _inventory.AddLootToInventory(targetCell.Actor.GetInventory());
+            AddLootToInventory(targetCell.Actor.GetInventory());
             targetCell.Actor.Destroy();
             targetCell.Actor = null;
             foreach (var item in _inventory.GetInventory())
