@@ -1,5 +1,7 @@
 using Codecool.DungeonCrawl.Logic.Actors;
 using Perlin.Display;
+using System.Collections.Generic;
+using System.Numerics;
 
 namespace Codecool.DungeonCrawl.Logic.Map
 {

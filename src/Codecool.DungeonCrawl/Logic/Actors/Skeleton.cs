@@ -5,6 +5,9 @@ using Codecool.DungeonCrawl.Items;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Linq;
+using SixLabors.ImageSharp.ColorSpaces;
+using System.Runtime.ExceptionServices;
+using SharpDX.Direct3D;
 
 namespace Codecool.DungeonCrawl.Logic.Actors
 {
@@ -23,7 +26,7 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public int _actionPoints { get; private set; } = 50;
         public int _magicResistance { get; private set; } = 0;
         public int _armor { get; private set; } = 5;
-
+        private bool _isAggressive;
         private float _timeLastMove;
 
         public Skeleton(Cell cell) : base(cell, TileSet.GetTile(TileType.Skeleton))
@@ -37,7 +40,8 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             };
             var lootTable = new LootTable(lootableItems);
             _inventory = new Inventory(lootTable.RandomizeLoot());
-            bool isAgressive = IsAggressive();
+            _isAggressive = IsAggressive();
+
         }
 
         private bool IsAggressive()
@@ -47,15 +51,30 @@ namespace Codecool.DungeonCrawl.Logic.Actors
 
         private bool AggressiveRunCheck(Player player)
         {
-            int CriticalDistance = 3;
-            (int x, int y) distance = GetDistanceToPlayer(player);
-            return distance.x <= CriticalDistance || distance.y <= CriticalDistance;
+            int CriticalDistance = 5;
+            var playerPosition = player.Position;
+            var skeletonPosition = this.Position;
+            (int x, int y) distance = GetVector(playerPosition, skeletonPosition);
+            distance = (Math.Abs(distance.x), Math.Abs(distance.y));
+            return distance.x <= CriticalDistance && distance.y == 0 || distance.y <= CriticalDistance && distance.x == 0;
         }
 
-        private void AggressiveRunStart(Player player)
+        private Direction ChargePlayerDirection(Player player)
         {
-            
+            (int x, int y) vector = GetVector(player.Position, this.Position);
+
+            (int x, int y) normalize = (Math.Sign(vector.x), Math.Sign(vector.y));
+
+            Direction targetDirection = normalize.ToDirection();
+            return targetDirection;
         }
+
+        private void ChargePlayer(Player player)
+        {
+            Direction dir = ChargePlayerDirection(player);
+            TryMove(dir);
+        }
+
 
         public Direction GetRandomDirection()
         {
@@ -82,14 +101,10 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             }
         }
 
-        public (int x, int y) GetStartPosition()
-        {
-            return (this.Position.x, this.Position.y);
-        }
 
-        public (int x, int y) GetDistanceToPlayer(Player player)
-        {
-            (int x, int y) distance = (Math.Abs(this.Position.x - player.Position.x), Math.Abs(this.Position.y - player.Position.y));
+        public (int x, int y) GetVector((int x, int y) position, (int x, int y)otherPosition)
+        {                       
+            (int x, int y) distance = ((position.x - otherPosition.x), (position.y - otherPosition.y));
             return distance;
         }
 
@@ -101,10 +116,18 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public void Update(float deltaTime)
         {
             _timeLastMove += deltaTime;
-            if(_timeLastMove >= 1.0f)
+            if(_timeLastMove >= 1.3f)
             {
-                _timeLastMove = 0;
-                RandomAiMove();
+                if (_isAggressive && AggressiveRunCheck(Player.Singleton))
+                {
+                    _timeLastMove = 0;
+                    ChargePlayer(Player.Singleton);
+                }
+                else
+                {
+                    _timeLastMove = 0;
+                    RandomAiMove();
+                }
             }
         }
     }
