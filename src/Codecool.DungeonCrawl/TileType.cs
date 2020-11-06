@@ -30,6 +30,7 @@
         Treasure,
         Hammer,
         Arrows,
-        Haerówka
+        Keanu,
+        Dog
     }
 }

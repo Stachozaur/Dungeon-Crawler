@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace Codecool.DungeonCrawl.Logic.Actors
 {
-    public abstract class Enemy : Actor, IUpdatable
+    public abstract class Enemy : Actor
     {
         public abstract bool isAggressive { get; set; }
 
@@ -20,6 +20,12 @@ namespace Codecool.DungeonCrawl.Logic.Actors
 
         public abstract List<string> speakList { get; set; }
         public TextField textField { get; set; }
+
+        public abstract float timeToMove { get; set; }
+        public abstract float timeToSpeak { get; set; }
+        protected bool isTextOver = false;
+
+
 
         public Enemy(Cell cell, Rectangle tile) : base(cell, tile)
         {
@@ -101,45 +107,73 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             return distance;
         }
 
+        public (int x, int y) GetDistance((int x, int y) position, (int x, int y) otherPosition)
+        {
+            (int x, int y) distance = (Math.Abs(position.x - otherPosition.x), Math.Abs(position.y - otherPosition.y));
+            return distance;
+        }
+    
+
         public bool IsPlayerClose()
         {
             return false;
         }
 
-        public void Update(float deltaTime)
-        {
-            var textField = UI.CreateEnemyText(this);
+        //public void Update(float deltaTime)
+        //{
+        //    var textField = UI.CreateEnemyText(this);
+        //    EnemyMove(deltaTime, textField, this.timeToMove);
+        //    EnemySpeakByTime(deltaTime, textField, timeToSpeak);
+        //}
 
-            EnemyMove(deltaTime, textField);
-            EnemySpeak(deltaTime, textField);
+
+        protected (int x, int y) UpdatePosition()
+        {
+            return (Position.x, Position.y);
         }
-
-
-        private void EnemySpeak(float deltaTime, TextField textField)
+        protected void EnemySpeak(float deltaTime, TextField textField, float timeToSpeak)
         {
-            ;
             timeLastSpeak += deltaTime;
             timeToRemoveSpeak += deltaTime;
-            if (timeLastSpeak >= 3f)
+            if (timeLastSpeak >= timeToSpeak)
             {
                 UI.DisplayEnemyText(textField);
                 timeLastSpeak = 0;
                 timeToRemoveSpeak = 0;
 
+                if (timeToRemoveSpeak >= 2f)
+                {
+                    UI.RemoveEnemyText(textField);
+                }
+            }
+        }
+        protected void EnemySpeak(float deltaTime, TextField textField, (int x, int y) distance)
+        {
+            timeLastSpeak += deltaTime;
+            timeToRemoveSpeak += deltaTime;
+            if (distance.x <= 1 && distance.y == 0 || distance.y <= 1 && distance.x == 0) 
+            {
+                UI.DisplayEnemyText(textField);
+                timeLastSpeak = 0;
+                timeToRemoveSpeak = 0;
+            }
+            RemoveText();
+        }
+
+        protected void RemoveText()
+        {
             if (timeToRemoveSpeak >= 2f)
             {
                 UI.RemoveEnemyText(textField);
             }
 
-            }
         }
 
-        private void EnemyMove(float deltaTime, TextField textField)
+        protected void EnemyMove(float deltaTime, TextField textField, float timeToMove)
         {
             timeLastMove += deltaTime;
-            if (timeLastMove >= 1.3f)
+            if (timeLastMove >= timeToMove)
             {
-                UI.RemoveEnemyText(textField);
                 if (isAggressive && AggressiveRunCheck(Player.Singleton))
                 {
                     timeLastMove = 0;

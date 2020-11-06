@@ -30,6 +30,8 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public override List<string> speakList { get; set; }
         public override float timeLastSpeak { get; set; }
         public override float timeToRemoveSpeak { get; set; }
+        public override float timeToMove { get; set; } = 0.5f;
+        public override float timeToSpeak { get; set; } = 31111f;
 
         public Skeleton(Cell cell) : base(cell, TileSet.GetTile(TileType.Skeleton))
         {
@@ -42,10 +44,18 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             };
             var lootTable = new LootTable(lootableItems);
 
-            speakList = new List<string> { "Praca, Praca" };
+            speakList = new List<string> { "xD" };
 
             _inventory = new Inventory(lootTable.RandomizeLoot());
             isAggressive = IsAggressive();
+            textField = UI.CreateEnemyText(this);
+
+        }
+
+        public void Update(float deltaTime)
+        {
+            EnemySpeak(deltaTime, textField, timeToSpeak);
+            EnemyMove(deltaTime, textField, timeToMove);
 
         }
     }

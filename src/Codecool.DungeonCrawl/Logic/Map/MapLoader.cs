@@ -99,12 +99,13 @@ namespace Codecool.DungeonCrawl.Logic.Map
             'w' => TileType.Floor,
             'a' => TileType.Floor,
             'm' => TileType.Floor,
-            'H' => TileType.Floor,
+            'K' => TileType.Floor,
             'k' => TileType.Floor,
             'b' => TileType.Floor,
             'r' => TileType.Floor,
             'y' => TileType.Floor,  
             't' => TileType.Floor,
+            'd' => TileType.Dog,
             _ => TileType.Empty
         };
 
@@ -126,7 +127,7 @@ namespace Codecool.DungeonCrawl.Logic.Map
             'm' => new ItemActor(cell, new Consumable("Mana Potion", 20, false, 100)),
             'h' => new ItemActor(cell, new Consumable("Healing Potion", 20, true, 100)),
             't' => new Treasure(cell),
-            'H' => new Haerówka(cell),
+            'K' => new Keanu(cell),          
             _ => null
         };
     }

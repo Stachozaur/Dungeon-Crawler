@@ -103,6 +103,7 @@ namespace Codecool.DungeonCrawl
             "Sword" => TileType.Sword,
             "Healing Potion" => TileType.HealingPotion,
             "Mana Potion" => TileType.ManaPotion,
+            "Blue Key" => TileType.Key,
             _ => TileType.Empty
         };
 
@@ -134,6 +135,7 @@ namespace Codecool.DungeonCrawl
         public static void RemoveEnemyText(TextField textField)
         {
             PerlinApp.Stage.RemoveChild(textField);
+
         }
     }
 

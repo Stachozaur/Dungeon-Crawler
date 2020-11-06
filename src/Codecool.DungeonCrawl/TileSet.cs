@@ -35,7 +35,7 @@ namespace Codecool.DungeonCrawl
                 [TileType.Armor] = CreateTile(0, 23),
                 [TileType.Hammer] = CreateTile(5, 29),
 
-                [TileType.Haerówka] = CreateTile(31, 10),
+                [TileType.Keanu] = CreateTile(31, 8),
                 [TileType.UIborderHorizontalTop] = CreateTile(17, 19),
                 [TileType.UIborderVerticalLeft] = CreateTile(16, 20),
                 [TileType.UIborderHorizontalBottom] = CreateTile(17,21),
@@ -44,14 +44,16 @@ namespace Codecool.DungeonCrawl
                 [TileType.UIborderCornerBottomRaight] = CreateTile(18, 21),
                 [TileType.UIborderCornerTopLeft] = CreateTile(16, 19),
                 [TileType.UIborderCornerTopRight] = CreateTile(18, 19),
-                [TileType.HealingPotion] = CreateTile(17,24),
+                [TileType.HealingPotion] = CreateTile(18,25),
                 [TileType.WoodenShield] = CreateTile(8,24),
                 [TileType.ManaPotion] = CreateTile(16,25),
                 [TileType.IronChestplate] = CreateTile(0,23),
                 [TileType.DoorBlue] = CreateTile(0, 10),
                 [TileType.DoorRed] = CreateTile(0, 20),
                 [TileType.DoorYellow] = CreateTile(23, 10),
-                [TileType.Treasure] = CreateTile(23, 11)
+                [TileType.Treasure] = CreateTile(23, 11),
+                [TileType.Key] = CreateTile(17,23),
+                [TileType.Dog] = CreateTile(31, 7)
             };
         }
 

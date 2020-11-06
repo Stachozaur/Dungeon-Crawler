@@ -8,7 +8,7 @@ using Veldrid;
 
 namespace Codecool.DungeonCrawl.Logic.Actors
 {
-    public class Haerówka : Enemy, IUpdatable, IPlayerAttributes
+    public class Keanu : Enemy, IUpdatable, IPlayerAttributes
     {
         public int _hp { get; private set; } = 20;
         public int _attack { get; private set; } = 5;
@@ -21,8 +21,9 @@ namespace Codecool.DungeonCrawl.Logic.Actors
         public override List<string> speakList { get; set; }
         public override float timeLastSpeak { get; set; }
         public override float timeToRemoveSpeak { get; set; }
-
-        public Haerówka(Cell cell) : base(cell, TileSet.GetTile(TileType.Haerówka))
+        public override float timeToMove { get; set; } = 66666f;
+        public override float timeToSpeak { get; set; } = 5f;
+        public Keanu(Cell cell) : base(cell, TileSet.GetTile(TileType.Keanu))
         {
             Program.UpdatablesToAdd.Add(this);
             var lootableItems = new Dictionary<Item, int>
@@ -33,10 +34,21 @@ namespace Codecool.DungeonCrawl.Logic.Actors
             };
             var lootTable = new LootTable(lootableItems);
 
-            speakList = new List<string> { "OH!, YES!!!, AHHH!!, SOFTSKILLS YEAH, SOFTSKILLS AAARGHH", "Every fall is chance to rise!", "Yes! Doing your job is part of your JOB!", "Hmm, I can smell your softskills" };
+            speakList = new List<string> { "You are Breathtaking!"};
 
             _inventory = new Inventory(lootTable.RandomizeLoot());
             isAggressive = IsAggressive();
+            textField = UI.CreateEnemyText(this);
+
+        }
+
+        public void Update(float deltaTime)
+        {
+            (int x, int y) distance = GetDistance(Player.Singleton.Position, this.Position);
+            EnemySpeak(deltaTime, textField, distance);
+            EnemyMove(deltaTime, textField, timeToMove);
+
+
 
         }
     }
